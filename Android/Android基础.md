@@ -6,7 +6,7 @@ Parcelable的设计初衷是因为Serializable效率过慢（使用反射），�
 
 -  Parcelable不能使用在要将数据存储在磁盘上的情况，因为Parcelable不能很好的保证数据的持续性在外界有变化的情况下。尽管Serializable效率低点，但此时还是建议使用Serializable 。
 
-#### 3、dpi、ppi、px、pt、dp、sp的区别。
+#### 2、dpi、ppi、px、pt、dp、sp的区别。
 - px(pixel)：像素，电子屏幕上组成一幅图画或照片的最基本单元
 - pt(point)：点，印刷行业常用单位，等于1/72英寸
 - ppi(pixel per inch)：每英寸像素数，ppi是指屏幕上的像素密度，该值越高，则屏幕越细腻。   
