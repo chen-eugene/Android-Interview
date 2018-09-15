@@ -17,3 +17,7 @@
 [HashMap源码](https://blog.csdn.net/ns_code/article/details/36034955)
 - 在Java 8之前的实现中是用链表解决冲突的，在产生碰撞的情况下，进行get时，两步的时间复杂度O(1)+O(n)。因此，当碰撞很厉害的时候n很大，O(n)的速度显然是影响速度的。因此在Java 8中，利用红黑树替换链表，这样复杂度就变成了O(1)+O(logn)了，这样在n很大的时候，能够比较理想的解决这个问题。
 - 当put时，如果发现目前的bucket占用程度已经超过了Load Factor所希望的比例，那么就会发生resize。在resize的过程，简单的说就是把bucket扩充为2倍，之后重新计算index，把节点再放到新的bucket中。
+#### 5、LinkedHashMap实现原理。
+[LinkedHashMap工作原理](https://yikun.github.io/2015/04/02/Java-LinkedHashMap%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/)    
+[LinkedHashMap源码](https://blog.csdn.net/ns_code/article/details/37867985)   
+![LinkedHashMap结构图](https://github.com/chen-eugene/Interview/blob/master/image/v2-a821a76fb84ce6223598c89ae8ebe7b0_hd.jpg)
