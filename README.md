@@ -15,4 +15,4 @@
 ### [源码分析](https://github.com/chen-eugene/Interview/blob/master/Android/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90.xml)
 
 ## Other
-### [设计模式]()
+### [设计模式](https://github.com/chen-eugene/Interview/blob/master/other/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F.md)
