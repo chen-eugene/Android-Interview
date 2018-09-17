@@ -13,3 +13,6 @@
 ### [View剖析](https://github.com/chen-eugene/Interview/blob/master/Android/View%E5%89%96%E6%9E%90.md)
 ### [常用框架](https://github.com/chen-eugene/Interview/blob/master/Android/%E5%B8%B8%E7%94%A8%E6%A1%86%E6%9E%B6.md)
 ### [源码分析](https://github.com/chen-eugene/Interview/blob/master/Android/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90.xml)
+
+## Other
+### [设计模式]()
