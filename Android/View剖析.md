@@ -18,3 +18,17 @@ Touch事件的分发过程有三个重要的方法来完成：dispatchTouchEvent
 - 如果View不消耗除ACTION_DOWN意外的其他事件，此父视图的onTouchEvent方法不会被调用，但是当前的View可以持续接收到后续的事件，最终事件会被传递给Activity处理。
 
 - dispatchTouchEvent回true就是消费事件，这种说法不完全正确。dispatchTouchEvent事件派发是传递的，如果返回值为false将停止下次事件派发，如果返回true将继续下次派发。
+
+#### 2、View的位置参数有哪些，left、x、translationX的含义以及三者的关系。
+- view的位置由left、top、right、bottom四个属性决定，这几个坐标可以通过getLeft()、getTop()、getRight()、getBottom()获取。注意这四个坐标是相对坐标，即相对于父容器的坐标。当view发生移动时，这几个坐标是不变的。
+
+- 从Android 3.0开始，增加了几个参数：x、y、translationX、translationY，都是相对于父容器的坐标。
+
+ x指view左上角的横坐标，当view发生移动时，x会变化；
+
+ translationX指view左上角的横坐标相对于父容器的偏移量，当view发生移动时，translationX会变化。
+ `x = left + translationX `
+
+- rawX是绝对坐标，是相对于屏幕左上角的横坐标，view本身没有getRawX的方法，这个方法一般在MotionEvent对象里使用。
+
+- scrollX指的是view在滑动过程中，view的左边缘和view内容的左边缘在水平方向的距离（注意与translationX 的区别，translationX 指的是view本身的移动，scrollX是view的内容移动），也就是说调用了view的scrollTo或scrollBy方法，view本身不会移动，只会移动view的内容。
