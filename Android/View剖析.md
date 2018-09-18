@@ -34,3 +34,23 @@ Touch事件的分发过程有三个重要的方法来完成：dispatchTouchEvent
 - scrollX指的是view在滑动过程中，view的左边缘和view内容的左边缘在水平方向的距离（注意与translationX 的区别，translationX 指的是view本身的移动，scrollX是view的内容移动），也就是说调用了view的scrollTo或scrollBy方法，view本身不会移动，只会移动view的内容。    
 ![坐标图](https://github.com/chen-eugene/Interview/blob/master/image/20160808154319878.png)
 
+#### 3、自定义View的流程，自定义View需要注意的问题，例如自定义View是否需要重写onLayout，onMeasure。
+
+**自定义View的流程：**
+
+- 集成特定的View（如TextView）。 
+
+  主要用于扩展已有的View的功能，这种方法不需要自己支持wrap_content和padding。
+
+- 继承特定的ViewGroup（如LinearLayout）
+
+  主要用于将几种View进行组合，这种方法不需要自己处理ViewGroup的测量和布局。
+
+- 继承View重写onDraw方法。
+
+   主要用于不规则的效果，这种方式需要对View进行绘制，重写onDraw方法，并且采用这种方法需要自己支持wrap_content和padding。
+
+- 继承ViewGroup。
+
+相当于自定义新的布局，这种方式需要自己处理ViewGroup的测量和布局两个过程，并且同时处理子视图的测量和布局过程。
+
