@@ -32,5 +32,5 @@ Touch事件的分发过程有三个重要的方法来完成：dispatchTouchEvent
 - rawX是绝对坐标，是相对于屏幕左上角的横坐标，view本身没有getRawX的方法，这个方法一般在MotionEvent对象里使用。
 
 - scrollX指的是view在滑动过程中，view的左边缘和view内容的左边缘在水平方向的距离（注意与translationX 的区别，translationX 指的是view本身的移动，scrollX是view的内容移动），也就是说调用了view的scrollTo或scrollBy方法，view本身不会移动，只会移动view的内容。
-![]()
+![坐标图](https://github.com/chen-eugene/Interview/blob/master/image/20160808154319878.png)
 
