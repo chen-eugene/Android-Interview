@@ -55,4 +55,12 @@ Touch事件的分发过程有三个重要的方法来完成：dispatchTouchEvent
 - 继承ViewGroup。
 
   相当于自定义新的布局，这种方式需要自己处理ViewGroup的测量和布局两个过程，并且同时处理子视图的测量和布局过程。
+  
+  **注意点：**
+- 集成子View或ViewGroup的控件，如果不在onMeasure方法中对warp_content进行处理，那么设中为warp_content的时候，实际的大小为parentSize。
+- 直接继承自ViewGroup的控件需要在onMeasure和onLayout中考虑padding和子视图margin对其造成的影响，不然将导致padding和子视图的margin失效。
+- View带有滑动嵌套情形时，需要处理好滑动冲突。
+- View中如果有线程或者动画，需要及时停止。
+
+   当包含View的Activity退出或者当前View被remove时，View的onDetachedFromWindow方法会被调用，和此方法对应的是onAttachedToWindow，当View变得不可见时同样需要停止线程和动画，否则可能会造成内存泄漏。
 
