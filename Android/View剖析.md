@@ -1,4 +1,4 @@
-### 1、Touch事件的分发流程。
+#### 1、Touch事件的分发流程。
 
 [ViewGroup事件传递](https://blog.csdn.net/yanbober/article/details/45912661)  
 [View事件传递](https://blog.csdn.net/yanbober/article/details/45887547)
@@ -21,7 +21,7 @@ Touch事件的分发过程有三个重要的方法来完成：dispatchTouchEvent
 
 - dispatchTouchEvent回true就是消费事件，这种说法不完全正确。dispatchTouchEvent事件派发是传递的，如果返回值为false将停止下次事件派发，如果返回true将继续下次派发。
 
-### 2、View的位置参数有哪些，left、x、translationX的含义以及三者的关系。
+#### 2、View的位置参数有哪些，left、x、translationX的含义以及三者的关系。
 - view的位置由left、top、right、bottom四个属性决定，这几个坐标可以通过getLeft()、getTop()、getRight()、getBottom()获取。注意这四个坐标是相对坐标，即相对于父容器的坐标。当view发生移动时，这几个坐标是不变的。
 
 - 从Android 3.0开始，增加了几个参数：x、y、translationX、translationY，都是相对于父容器的坐标。
@@ -36,7 +36,7 @@ Touch事件的分发过程有三个重要的方法来完成：dispatchTouchEvent
 - scrollX指的是view在滑动过程中，view的左边缘和view内容的左边缘在水平方向的距离（注意与translationX 的区别，translationX 指的是view本身的移动，scrollX是view的内容移动），也就是说调用了view的scrollTo或scrollBy方法，view本身不会移动，只会移动view的内容。    
 ![坐标图](https://github.com/chen-eugene/Interview/blob/master/image/20160808154319878.png)
 
-### 3、自定义View的流程，自定义View需要注意的问题，例如自定义View是否需要重写onLayout，onMeasure。
+#### 3、自定义View的流程，自定义View需要注意的问题，例如自定义View是否需要重写onLayout，onMeasure。
 
 **自定义View的流程：**
 
