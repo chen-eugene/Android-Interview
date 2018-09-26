@@ -41,7 +41,7 @@ MeasureSpec是一个32位的int值，高2位表示SpecMode，指测量模式；�
 
 - 对于DecorView，其MeasureSpec由窗口的尺寸和其资深的LayoutParams来共同决定。
 - 对于普通的View，其MeasureSpec由父容器的MeasureSpec和自身的LayoutParams共同决定。  
-![]()
+![MeasureSpec](https://github.com/chen-eugene/Interview/blob/master/image/20170311114110621.jpg)
 
 
 
