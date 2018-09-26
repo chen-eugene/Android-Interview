@@ -49,6 +49,13 @@ ViewRoot对应于ViewRootImpl类，是链接WindowManager和DocorView的纽带�
 
 View的绘制流程就是从ViewRoot的performTraversals方法开始的，经过measure、layout和draw三个过程之后最终将View绘制出来。
 
+**measure过程：**
+ - View的measure过程：根据父类的measureSpec和自身的layoutParams来确定自身的measureSpec。
+
+  直接继承View的自定义控件需要重写onMeasure方法并设置wrap_content时的自身大小，否则在布局中使用wrap_content就相当于match_content。
+  
+ - ViewGroup的measure过程：
+
 #### 5、自定义View的流程，自定义View需要注意的问题，例如自定义View是否需要重写onLayout，onMeasure。
 
 **自定义View的流程：**
@@ -76,4 +83,6 @@ View的绘制流程就是从ViewRoot的performTraversals方法开始的，经过
 - View中如果有线程或者动画，需要及时停止。
 
    当包含View的Activity退出或者当前View被remove时，View的onDetachedFromWindow方法会被调用，和此方法对应的是onAttachedToWindow，当View变得不可见时同样需要停止线程和动画，否则可能会造成内存泄漏。
+   
+   
 
