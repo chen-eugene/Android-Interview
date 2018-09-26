@@ -36,6 +36,15 @@ Touch事件的分发过程有三个重要的方法来完成：dispatchTouchEvent
 - scrollX指的是view在滑动过程中，view的左边缘和view内容的左边缘在水平方向的距离（注意与translationX 的区别，translationX 指的是view本身的移动，scrollX是view的内容移动），也就是说调用了view的scrollTo或scrollBy方法，view本身不会移动，只会移动view的内容。    
 ![坐标图](https://github.com/chen-eugene/Interview/blob/master/image/20160808154319878.png)
 
+#### 3、什么是MeasureSpec。
+MeasureSpec是一个32位的int值，高2位表示SpecMode，指测量模式；低30位表示SpecSize，指在某种测量模式下的规格大小。MeasureSpec一旦确定后，onMeasure方法就可以确定View的测量宽/高。
+
+- 对于DecorView，其MeasureSpec由窗口的尺寸和其资深的LayoutParams来共同决定。
+- 对于普通的View，其MeasureSpec由父容器的MeasureSpec和自身的LayoutParams共同决定。  
+![]()
+
+
+
 #### 3、自定义View的流程，自定义View需要注意的问题，例如自定义View是否需要重写onLayout，onMeasure。
 
 **自定义View的流程：**
