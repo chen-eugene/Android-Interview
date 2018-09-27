@@ -67,12 +67,14 @@ View的绘制流程就是从ViewRoot的performTraversals方法开始的，经过
 - 绘制装饰（如前景，scrollbar等）。
 
 #### 5、怎么获取View的宽高。
-**getMeasuredWidth和getWidth的区别：**
+**getMeasuredWidth和getWidth的区别：**      
+
  - getMeasuredWidth返回的是View的测量宽/高，但某些情况下（如ListView）系统可能需要多次测量才能确定最终的测量宽/高，此时在onMeasure方法中拿不到准确的测量宽度。
  - getWidth返回是最终宽度，通常情况下，View的测量宽/高就等于最终宽/高，但也存在极端情况导致两者不一致（如重写layout方法，手动修改最终宽/高）。
  - getMeasureWidth必须在onMeasure之后才有效，getWidth必须在onLayout之后才有效。
 
-**获取View的宽/高：**
+**获取View的宽/高：**    
+
 View的measure过程和Activity的生命周期不是同步执行的，所以不能通过Activity的生命周期来直接获取宽/高。
 
 - Activity/View#onWindowFocusChanged：View初始化已经完成时会调用。
