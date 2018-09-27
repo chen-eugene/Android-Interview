@@ -20,7 +20,8 @@ Touch事件的分发过程有三个重要的方法来完成：dispatchTouchEvent
 - 如果View不消耗除ACTION_DOWN意外的其他事件，此父视图的onTouchEvent方法不会被调用，但是当前的View可以持续接收到后续的事件，最终事件会被传递给Activity处理。
 
 - dispatchTouchEvent回true就是消费事件，这种说法不完全正确。dispatchTouchEvent事件派发是传递的，如果返回值为false将停止下次事件派发，如果返回true将继续下次派发。
-
+ 
+  
 #### 2、View的位置参数有哪些，left、x、translationX的含义以及三者的关系。
 - view的位置由left、top、right、bottom四个属性决定，这几个坐标可以通过getLeft()、getTop()、getRight()、getBottom()获取。注意这四个坐标是相对坐标，即相对于父容器的坐标。当view发生移动时，这几个坐标是不变的。
 
@@ -35,7 +36,8 @@ Touch事件的分发过程有三个重要的方法来完成：dispatchTouchEvent
 
 - scrollX指的是view在滑动过程中，view的左边缘和view内容的左边缘在水平方向的距离（注意与translationX 的区别，translationX 指的是view本身的移动，scrollX是view的内容移动），也就是说调用了view的scrollTo或scrollBy方法，view本身不会移动，只会移动view的内容。    
 ![坐标图](https://github.com/chen-eugene/Interview/blob/master/image/20160808154319878.png)
-
+  
+  
 #### 3、什么是MeasureSpec。
 MeasureSpec是一个32位的int值，高2位表示SpecMode，指测量模式；低30位表示SpecSize，指在某种测量模式下的规格大小。MeasureSpec一旦确定后，onMeasure方法就可以确定View的测量宽/高。
 
@@ -43,7 +45,8 @@ MeasureSpec是一个32位的int值，高2位表示SpecMode，指测量模式；�
 - 对于普通的View，其MeasureSpec由父容器的MeasureSpec和自身的LayoutParams共同决定。  
 
 ![MeasureSpec](https://github.com/chen-eugene/Interview/blob/master/image/20170311114110621.jpg)
-
+  
+  
 #### 4、View绘制过程。
 ViewRoot对应于ViewRootImpl类，是链接WindowManager和DocorView的纽带，View的三大流程均是通过ViewRoot来完成的。在ActivityThread中，当Activity对象被创建完毕后，会将DecorView添加到Window中，同时会创建ViewRootImpl对象，并将ViewRootImpl对象和DecorView建立关联。
 
@@ -65,7 +68,8 @@ View的绘制流程就是从ViewRoot的performTraversals方法开始的，经过
 - 绘制自身(onDraw)。
 - 绘制children(dispatchDraw)。
 - 绘制装饰（如前景，scrollbar等）。
-
+  
+  
 #### 5、怎么获取View的宽高。
 **getMeasuredWidth和getWidth的区别：**      
 
@@ -86,8 +90,9 @@ View的measure过程和Activity的生命周期不是同步执行的，所以不�
 - view.measure(int widthMeasureSpec,int heightMeasureSpec)通过手动对View进行测量来得到宽/高，但也分情况处理：
   
    match_parent：
-
-#### 5、自定义View的流程，自定义View需要注意的问题，例如自定义View是否需要重写onLayout，onMeasure。
+  
+  
+#### 6、自定义View的流程，自定义View需要注意的问题，例如自定义View是否需要重写onLayout，onMeasure。
 
 **自定义View的流程：**
 
