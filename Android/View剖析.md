@@ -52,9 +52,19 @@ View的绘制流程就是从ViewRoot的performTraversals方法开始的，经过
 **measure过程：**
  - View的measure过程：根据父类的measureSpec和自身的layoutParams来确定自身的measureSpec。
 
-   直接继承View的自定义控件需要重写onMeasure方法并设置wrap_content时的自身大小，否则在布局中使用wrap_content就相当于match_content。
+  直接继承View的自定义控件需要重写onMeasure方法并设置wrap_content时的自身大小，否则在布局中使用wrap_content就相当于match_content。
   
- - ViewGroup的measure过程：
+ - ViewGroup的measure过程：ViewGroup没有重写onMeasure方法，但是提供了measureChild方法来循环遍历，ViewGroup会根据子元素的大小来测量自己的大小，但不能超过父容器剩余的大小。
+
+**layout过程：**
+- 当ViewGroup的位置被确定后，它会在onLayout方法中遍历所有的子元素并调用其layout方法，在layout方法中onLayout方法又会被调用。
+- layout方法确定View本身的位置，而onLayout方法则会确定所有子元素的位置。
+
+**draw过程：**
+- 绘制背景background.draw(canvas)。
+- 绘制自身(onDraw)。
+- 绘制children(dispatchDraw)。
+- 绘制装饰（如前景，scrollbar等）。
 
 #### 5、自定义View的流程，自定义View需要注意的问题，例如自定义View是否需要重写onLayout，onMeasure。
 
