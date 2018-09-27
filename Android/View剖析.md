@@ -21,8 +21,11 @@ Touch事件的分发过程有三个重要的方法来完成：dispatchTouchEvent
 
 - dispatchTouchEvent回true就是消费事件，这种说法不完全正确。dispatchTouchEvent事件派发是传递的，如果返回值为false将停止下次事件派发，如果返回true将继续下次派发。
  
+ 
+#### 2、点击事件被拦截，但是想传到下面的view，如何操作。
+ 
   
-#### 2、View的位置参数有哪些，left、x、translationX的含义以及三者的关系。
+#### 3、View的位置参数有哪些，left、x、translationX的含义以及三者的关系。
 - view的位置由left、top、right、bottom四个属性决定，这几个坐标可以通过getLeft()、getTop()、getRight()、getBottom()获取。注意这四个坐标是相对坐标，即相对于父容器的坐标。当view发生移动时，这几个坐标是不变的。
 
 - 从Android 3.0开始，增加了几个参数：x、y、translationX、translationY，都是相对于父容器的坐标。
@@ -38,7 +41,7 @@ Touch事件的分发过程有三个重要的方法来完成：dispatchTouchEvent
 ![坐标图](https://github.com/chen-eugene/Interview/blob/master/image/20160808154319878.png)
   
   
-#### 3、什么是MeasureSpec。
+#### 4、什么是MeasureSpec。
 MeasureSpec是一个32位的int值，高2位表示SpecMode，指测量模式；低30位表示SpecSize，指在某种测量模式下的规格大小。MeasureSpec一旦确定后，onMeasure方法就可以确定View的测量宽/高。
 
 - 对于DecorView，其MeasureSpec由窗口的尺寸和其资深的LayoutParams来共同决定。
@@ -47,7 +50,7 @@ MeasureSpec是一个32位的int值，高2位表示SpecMode，指测量模式；�
 ![MeasureSpec](https://github.com/chen-eugene/Interview/blob/master/image/20170311114110621.jpg)
   
   
-#### 4、View绘制过程。
+#### 5、View绘制过程。
 ViewRoot对应于ViewRootImpl类，是链接WindowManager和DocorView的纽带，View的三大流程均是通过ViewRoot来完成的。在ActivityThread中，当Activity对象被创建完毕后，会将DecorView添加到Window中，同时会创建ViewRootImpl对象，并将ViewRootImpl对象和DecorView建立关联。
 
 View的绘制流程就是从ViewRoot的performTraversals方法开始的，经过measure、layout和draw三个过程之后最终将View绘制出来。
@@ -70,7 +73,7 @@ View的绘制流程就是从ViewRoot的performTraversals方法开始的，经过
 - 绘制装饰（如前景，scrollbar等）。
   
   
-#### 5、怎么获取View的宽高。
+#### 6、怎么获取View的宽高。
 **getMeasuredWidth和getWidth的区别：**      
 
  - getMeasuredWidth返回的是View的测量宽/高，但某些情况下（如ListView）系统可能需要多次测量才能确定最终的测量宽/高，此时在onMeasure方法中拿不到准确的测量宽度。
@@ -106,7 +109,7 @@ view.measure(widthMeasureSpec, heightMeasureSpec);
 ```
   
   
-#### 6、自定义View的流程，自定义View需要注意的问题，例如自定义View是否需要重写onLayout，onMeasure。
+#### 7、自定义View的流程，自定义View需要注意的问题，例如自定义View是否需要重写onLayout，onMeasure。
 
 **自定义View的流程：**
 
@@ -134,5 +137,11 @@ view.measure(widthMeasureSpec, heightMeasureSpec);
 
    当包含View的Activity退出或者当前View被remove时，View的onDetachedFromWindow方法会被调用，和此方法对应的是onAttachedToWindow，当View变得不可见时同样需要停止线程和动画，否则可能会造成内存泄漏。
    
+   
+#### 8、invalidate、postInvalidate、requestLayout的区别。
+
+- invalidate：请求重绘View树（也就是draw方法），如果View大小没有发生变化就不会调用layout过程，并且指挥绘制哪些需要重绘的View，也就是哪个View（View只绘制该View，ViewGroup绘制整个ViewGroup）请求invalidate方法就绘制该View。
+- postInvalidate：invalidate方法只能在UI线程中请求，postInvalidate可以在非UI线程中调用。
+- requestLayout：requestLayout()方法会调用measure过程和layout过程，不会调用draw过程，也不会重新绘制任何View包括该调用者本身。
    
 
