@@ -52,7 +52,7 @@ View的绘制流程就是从ViewRoot的performTraversals方法开始的，经过
 **measure过程：**
  - View的measure过程：根据父类的measureSpec和自身的layoutParams来确定自身的measureSpec。
 
-  直接继承View的自定义控件需要重写onMeasure方法并设置wrap_content时的自身大小，否则在布局中使用wrap_content就相当于match_content。
+    直接继承View的自定义控件需要重写onMeasure方法并设置wrap_content时的自身大小，否则在布局中使用wrap_content就相当于match_content。
   
  - ViewGroup的measure过程：ViewGroup没有重写onMeasure方法，但是提供了measureChild方法来循环遍历，ViewGroup会根据子元素的大小来测量自己的大小，但不能超过父容器剩余的大小。
 
