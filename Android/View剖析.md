@@ -89,7 +89,21 @@ View的measure过程和Activity的生命周期不是同步执行的，所以不�
 - ViewTreeObserver：随着View树状态的改变，onGlobalLayout会被多次调用。
 - view.measure(int widthMeasureSpec,int heightMeasureSpec)通过手动对View进行测量来得到宽/高，但也分情况处理：
   
-   match_parent：
+   match_parent：无法测量具体的宽/高，因为构造此种MeasureSpec需要知道parentSize，这个时候无法知道parentSize大小，所以测不出View的大小。
+
+具体的数值：
+```
+比如宽/高都是100px
+int widthMeasureSpec = View.MeasureSpec.makeMeasureSpec(100, View.MeasureSpec.EXACTLY);
+int heightMeasureSpec = View.MeasureSpec.makeMeasureSpec(100, View.MeasureSpec.EXACTLY);
+view.measure(widthMeasureSpec, heightMeasureSpec);
+```
+   wrap_content：
+```
+int widthMeasureSpec = View.MeasureSpec.makeMeasureSpec((1 << 30) - 1, View.MeasureSpec.AT_MOST);
+int heightMeasureSpec = View.MeasureSpec.makeMeasureSpec((1 << 30) - 1, View.MeasureSpec.AT_MOST);
+view.measure(widthMeasureSpec, heightMeasureSpec);
+```
   
   
 #### 6、自定义View的流程，自定义View需要注意的问题，例如自定义View是否需要重写onLayout，onMeasure。
