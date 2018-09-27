@@ -91,7 +91,7 @@ View的measure过程和Activity的生命周期不是同步执行的，所以不�
   
    match_parent：无法测量具体的宽/高，因为构造此种MeasureSpec需要知道parentSize，这个时候无法知道parentSize大小，所以测不出View的大小。
 
-具体的数值：
+   具体的数值：
 ```
 比如宽/高都是100px
 int widthMeasureSpec = View.MeasureSpec.makeMeasureSpec(100, View.MeasureSpec.EXACTLY);
