@@ -72,6 +72,19 @@ View的绘制流程就是从ViewRoot的performTraversals方法开始的，经过
  - getWidth返回是最终宽度，通常情况下，View的测量宽/高就等于最终宽/高，但也存在极端情况导致两者不一致（如重写layout方法，手动修改最终宽/高）。
  - getMeasureWidth必须在onMeasure之后才有效，getWidth必须在onLayout之后才有效。
 
+**获取View的宽/高：**
+View的measure过程和Activity的生命周期不是同步执行的，所以不能通过Activity的生命周期来直接获取宽/高。
+
+- Activity/View#onWindowFocusChanged：View初始化已经完成时会调用。
+
+   需要注意的是：当Activity得到焦点和失去焦点时均会被调用一次，如果频繁的执行onResume和onPause，那么onWindowFocusChanged将会被频繁调用。
+
+- view.post：通过post可以将runnable投递到消息队列的尾部，当Looper调用此runnable的时候，View已经初始化完成。
+- ViewTreeObserver：随着View树状态的改变，onGlobalLayout会被多次调用。
+- view.measure(int widthMeasureSpec,int heightMeasureSpec)通过手动对View进行测量来得到宽/高，但也分情况处理：
+  
+   match_parent：
+
 #### 5、自定义View的流程，自定义View需要注意的问题，例如自定义View是否需要重写onLayout，onMeasure。
 
 **自定义View的流程：**
