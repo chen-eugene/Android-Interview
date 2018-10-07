@@ -74,3 +74,12 @@ StringBuilder是Java5新增的一个StringBuffer的替代类，它不是线程�
  - 如果finally语句中没有return语句覆盖返回值，那么原来的返回值可能因为finally里的修改而改变也可能不变。
 - try块里的return语句在异常的情况下不会被执行，这样具体返回哪个看情况。
 - 当发生异常后，catch中的return执行情况与未发生异常时try中return的执行情况完全一样。
+
+#### 9、Java异常分类
+![异常分类](https://github.com/chen-eugene/Interview/blob/master/image/1354020417_5176.jpg)
+
+- Error：是程序无法处理的错误，表示运行应用程序中较严重问题，如ava虚拟机运行错误（Virtual MachineError）、内存溢出（OutOfMemoryError）等，这些错误表示故障发生于虚拟机自身、或者发生在虚拟机试图执行应用时。 
+- 运行时异常：都是RuntimeException类及其子类异常，如NullPointerException(空指针异常)、IndexOutOfBoundsException(下标越界异常)等，这些异常是不检查异常，程序中可以选择捕获处理，也可以不处理。 
+- 非运行时异常 （编译异常）：是RuntimeException以外的异常，如IOException、SQLException，类型上都属于Exception类及其子类，从程序语法角度讲是必须进行处理的异常，如果不处理，程序就不能编译通过。 
+
+
