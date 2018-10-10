@@ -10,11 +10,11 @@
 
   一个project包含一个或多个task，task包含两个重要功能：任务动作(task action)、任务依赖(task dependecy)。
 
-任务动作定义了一个任务执行时的最小工作单元。
+  任务动作定义了一个任务执行时的最小工作单元。
 
 - property：每个project和task实例都提供了可以通过getter和setter方法访问的属性。
 
-```
+ ```
 扩展属性申明：
 project.ext.myProp = 'myValue'     只有在初始申明扩展属性时需要使用ext命名空间
 ext {
@@ -24,4 +24,4 @@ ext {
 assert myProp == 'myValue'         使用ext命名空间访问属性是可选的
 println project.someOtherProp
 ext.someOtherProp = 567
-```
+ ```
