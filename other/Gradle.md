@@ -25,3 +25,13 @@ assert myProp == 'myValue'         使用ext命名空间访问属性是可选的
 println project.someOtherProp
 ext.someOtherProp = 567
  ```
+
+#### 2、gradle脚本的执行时序。
+Gradle脚本执行分为三个过程：
+- 初始化：分析有哪些module将要被构建，为每个module创建对应的 project实例。这个时候settings.gradle文件会被解析。 
+
+- 配置：处理所有的模块的 build 脚本，处理依赖，属性等。这个时候每个模块的build.gradle文件会被解析并配置，这个时候会构建整个task的链表。
+
+- 执行：根据task链表来执行某一个特定的task，这个task所依赖的其他task都将会被提前执行。
+
+  project.afterEvaluate，它表示所有的模块都已经配置完了，可以准备执行task了； 如果注册了多个project.afterEvaluate回调，那么执行顺序等同于注册顺序。
