@@ -47,3 +47,16 @@ getMemoryClass()和getLargeMemoryClass()方法最终读取的仍然是dalvik.vm.
 
 **设置largeHeap的确可以申请到更多的内存，但是收到dalvik.vm.heapsize的限制，当内存很大时，每次gc将花费更多的时间，性能也会下降。**
 
+#### 4、了解sp的apply和commit的区别吗，sp具体是怎么实现的，sp什么时候会将内存中的数据写入到文件中。
+Android 中的 SharedPreference 是轻量级的数据存储方式，能够保存简单的数据类型，比如 String、int、boolean 值等。其内部是以 XML 结构保存在 /data/data/包名/shared_prefs 文件夹下，数据以键值对的形式保存。
+
+- 初始化：首次使用SP的时候会通过IO操作把xml文件读取并存入一个map对象中，所以get操作实际上是直接访问的map集合，提高了效率，如果xml不存在就重新创建一个。
+
+  SP 在第一次创建后会维持一个SingleTon，以后都会返回这个实例，更新app时，xml文件并不会被删除。
+
+- 读数据：首先取得 SharedPreferencesImpl 对象锁，然后同步等待从磁盘加载数据完成，最后返回数据。如果单个 SP 存储的内容过多，将会导致 get 方法的时候阻塞过长，特别是在主线程调用的时候，所以建议在单个 SP 中尽量少地保存数据。
+- -写数据：SP 写入数据的操作是通过 Editor 完成的，一是将数据先写入内存中，即map集合；二是把数据写入到磁盘中。
+  - commit：同步执行，会阻塞当前线程，有返回值。
+  - apply：一般执行，没有返回值，推荐使用apply。 
+
+
