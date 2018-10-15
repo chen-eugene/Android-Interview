@@ -18,3 +18,32 @@ Parcelable的设计初衷是因为Serializable效率过慢（使用反射），�
 - dpi(dot per inch)：每英寸多少点，该值越高，则图片越细腻
 - dp(dip)：Density-independent pixel, 是安卓开发用的长度单位，1dp表示在屏幕像素点密度为160ppi时1px长度
 - sp:(scale-independent pixel)：安卓开发用的字体大小单位。
+
+#### 3、应用最多占多少内存。
+```
+获取app的分配的最大内存
+Runtime rt = Runtime.getRuntime();
+long maxMemory = rt.getMaxMemory();
+
+ActivityManager activityManager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+activityManager.getMemoryClass()；
+activityManager.getLargeMemoryClass()；
+```
+在设置android:largeheap = "false"时和android:largeheap = "true"是获取到的最大内存存在明显的差异。
+
+原则上Google原始OS的默认值是16m，但是各个厂商的OS会对这个值进行修改。
+
+可以在/system/build.prop文件中查看内存的配置参数，
+```
+shell@NX510J:/ $ cat /system/build.prop | grep heap
+dalvik.vm.heapsize=36m
+   
+dalvik.vm.heapstartsize=8m    ----起始分配内存
+dalvik.vm.heapgrowthlimit=192m ---- 一般情况app申请的最大内存 dalvik.vm.heapsize=512m   ---- 设置largeheap时，App可用的最大内存dalvik.vm.heaptargetutilization=0.75  ---- GC相关
+dalvik.vm.heapminfree=512k
+dalvik.vm.heapmaxfree=8m     ----- GC机制相关
+```
+getMemoryClass()和getLargeMemoryClass()方法最终读取的仍然是dalvik.vm.heapgrowthlimit和dalvik.vm.heapsize的值。
+
+**设置largeHeap的确可以申请到更多的内存，但是收到dalvik.vm.heapsize的限制，当内存很大时，每次gc将花费更多的时间，性能也会下降。**
+
