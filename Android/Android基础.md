@@ -26,8 +26,8 @@ dpi = √(1920^2 + 1080^2) / 4.95 = 445
 density = dpi^2 = 445^2 = 198025
 1dp = (dp * dpi) / 160 = (1 * 445) / 160 = 2.78px
 ```
-Android系统中定义的dpi：
-![dpi](https://github.com/chen-eugene/Interview/blob/master/image/1539659587(1).png)
+**Android系统中定义的dpi：**      
+![dpi](https://github.com/chen-eugene/Interview/blob/master/image/1539659587(1).png)       
 **在系统中使用的全部都是系统 dpi，没有使用物理 dpi，也获取不到物理 dpi。物理 dpi 主要用于厂家对于手机的参数描述**
 
 
