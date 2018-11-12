@@ -1,3 +1,5 @@
+### 第四章 
+
 #### 1、Gradle构建块。
 每个Gradle构建都包含三个基本构建快：
 - project：
@@ -59,3 +61,21 @@ Gradle脚本执行分为三个过程：
 - 执行：根据task链表来执行某一个特定的task，这个task所依赖的其他task都将会被提前执行。
 
   project.afterEvaluate，它表示所有的模块都已经配置完了，可以准备执行task了； 如果注册了多个project.afterEvaluate回调，那么执行顺序等同于注册顺序。
+  
+#### 5、申明task动作：动作(action)就是在task中合适的地方防止构建逻辑。Task接口提供了两个相关的方法来声明task动作：doFirst(相当于>>)和doLast(相当于<<)，当task被执行的时候，动作逻辑被定义为闭包参数被依次执行。
+
+#### 6、访问默认
+```
+	task printVersion << {
+		logger.quiet "Version:$version"
+	}
+```
+
+#### 7、定义task依赖
+	
+
+	
+
+
+
+
