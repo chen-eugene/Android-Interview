@@ -1,5 +1,4 @@
 #### 1、Gradle构建块。
-
 每个Gradle构建都包含三个基本构建快：
 - project：
 
@@ -15,6 +14,11 @@
 
 - property：每个project和task实例都提供了可以通过getter和setter方法访问的属性。
 
+#### 2、Gradle申明属性的方式
+
+ - 扩展属性：使用ext命名空间
+ 
+ 为了添加属性，需要使用ext命名空间
  ```
 扩展属性申明：
 project.ext.myProp = 'myValue'     只有在初始申明扩展属性时需要使用ext命名空间
@@ -26,8 +30,26 @@ assert myProp == 'myValue'         使用ext命名空间访问属性是可选的
 println project.someOtherProp
 ext.someOtherProp = 567
  ```
+ - 在gradle.property文件中申明
 
-#### 2、gradle脚本的执行时序。
+   Gradle属性可以通过gradle.properties文件中申明直接添加到项目中，这个文件位于<USER_HOME>/.gradle目录或项目的根目录下。这些这些属性可通过项目实例访问。记住，即使你有多个项目，每个用户也只能有一个Gradle属性文件<USER_HOME>/.gradle目录下。这是Gradle对它的限制。
+   
+```
+ 在gradle.properties文件中申明：
+ exampleProp = myValue
+ someOtherProp = 455
+ 
+ 在项目中访问这两个变量：
+ assert proect.exampleProp == 'myValue'
+ 
+ task printGradleProperty << {
+ 	println "Second property:$someOtherProp"
+ }
+```
+   
+#### 3、Gradle包装器：能够让机器在没有安装Gradle运行时的情况下运行Gradle构建，能够解决运行时版本不兼容问题。
+   
+#### 4、gradle脚本的执行时序。
 Gradle脚本执行分为三个过程：
 
 - 初始化：分析有哪些module将要被构建，为每个module创建对应的 project实例。这个时候settings.gradle文件会被解析。 
@@ -37,4 +59,3 @@ Gradle脚本执行分为三个过程：
 - 执行：根据task链表来执行某一个特定的task，这个task所依赖的其他task都将会被提前执行。
 
   project.afterEvaluate，它表示所有的模块都已经配置完了，可以准备执行task了； 如果注册了多个project.afterEvaluate回调，那么执行顺序等同于注册顺序。
-
