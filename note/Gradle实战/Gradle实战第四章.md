@@ -50,31 +50,69 @@ ext.someOtherProp = 567
 ```
    
 #### 3、Gradle包装器：能够让机器在没有安装Gradle运行时的情况下运行Gradle构建，能够解决运行时版本不兼容问题。
-   
-#### 4、gradle脚本的执行时序。
-Gradle脚本执行分为三个过程：
-
-- 初始化：分析有哪些module将要被构建，为每个module创建对应的 project实例。这个时候settings.gradle文件会被解析。 
-
-- 配置：处理所有的模块的 build 脚本，处理依赖，属性等。这个时候每个模块的build.gradle文件会被解析并配置，这个时候会构建整个task的链表。
-
-- 执行：根据task链表来执行某一个特定的task，这个task所依赖的其他task都将会被提前执行。
-
-  project.afterEvaluate，它表示所有的模块都已经配置完了，可以准备执行task了； 如果注册了多个project.afterEvaluate回调，那么执行顺序等同于注册顺序。
   
-#### 5、申明task动作：动作(action)就是在task中合适的地方防止构建逻辑。Task接口提供了两个相关的方法来声明task动作：doFirst(相当于>>)和doLast(相当于<<)，当task被执行的时候，动作逻辑被定义为闭包参数被依次执行。
+#### 4、申明task动作：动作(action)就是在task中合适的地方防止构建逻辑。Task接口提供了两个相关的方法来声明task动作：doFirst(相当于>>)和doLast(相当于<<)，当task被执行的时候，动作逻辑被定义为闭包参数被依次执行。
 
-#### 6、访问默认
+#### 5、访问默认
 ```
 	task printVersion << {
 		logger.quiet "Version:$version"
 	}
 ```
 
-#### 7、定义task依赖
+#### 6、定义task依赖
+```
+	task first << { println "first" }
+	task second << { println "second" }
 	
+	task printVersion(dependsOn:[second,first]) << {
+		logger.quiet "Version:$version"
+	}
+	
+	task third << { println "third" }
+	third.dependsOn('printVersion')	
+```
+	Gradle不能保证task依赖的执行顺序，dependsOn方法只是定义了所依赖的task需要先执行。
+	
+   
+#### 7、Gradle构建生命周期阶段
 
+Gradle脚本执行分为三个过程：
+
+- 初始化：分析有哪些module将要被构建，为每个module创建对应的 project实例。这个时候settings.gradle文件会被解析。在这个阶段当前已有的构建脚本代码都不会被执行。 
+
+- 配置：处理所有的模块的 build 脚本，处理依赖，属性等。这个时候每个模块的build.gradle文件会被解析并配置，这个时候会构建整个task的链表，task配置块永远在task动作执行之前被执行。
+
+- 执行：根据task链表来执行某一个特定的task，这个task所依赖的其他task都将会被提前执行。
+
+  project.afterEvaluate，它表示所有的模块都已经配置完了，可以准备执行task了； 如果注册了多个project.afterEvaluate回调，那么执行顺序等同于注册顺序。
 	
+#### 8、Gradle的内置task类型
+
+  Gradle的内置task类型都是DefaultTask的派生类。增强task（自定义task）可以直接使用。
+```
+	task createDistribution(type:Zip,dependsOn:makeReleaseVersion){
+		from war.outputs.files  //隐式饮用War task
+		
+		from(sourceSets*.allSource){  //把所有源文件都放到ZIP文件的src目录下
+			into 'src'
+		}
+		
+		from(rootDir){  //为ZIP文件添加版本文件
+			include versionFile.name
+		}
+	}
+	
+	task backupReleaseDistribution(type:Copy){
+		from createDistribution.outputs.files  //隐式饮用createDistribution的输出
+		into "$buildDir/backup"
+	}
+	
+	task release(dependsOn:backupReleaseDistribution) << {
+		logger.quiet 'Releasing the project...'
+	}
+```
+
 
 
 
