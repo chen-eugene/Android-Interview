@@ -75,13 +75,4 @@ Android 中的 SharedPreference 是轻量级的数据存储方式，能够保存
   - commit：同步执行，会阻塞当前线程，有返回值。
   - apply：一般执行，没有返回值，推荐使用apply。 
 
-#### 5、Fragment之间传递数据的方式。
-- 调用setArguments方法，通过bundle来传递参数。
-  
-  Activity意外销毁，被重新创建时会重新构建它所管理的Fragment，原先的Fragment的数据将会丢失，通过setArguments方法设置的bundle将会保留下来，最后恢复bundle里面的数据。
 
-- 直接在Activity中通过findViewById可以获取到Fragment的View。所有的操作都在Activity中，造成Activity臃肿。
-
-- 在onActivityCreate中通过findViewById可以获取到Fragment的View，然后进行操作。耦合性太高。
-
-- 通过接口回调的方式。
