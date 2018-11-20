@@ -11,6 +11,7 @@
 #### 2、关于Handler，在任何地方new Handler都是在什么线程下。
 
    ```
+   public Handler(Callback callback, boolean async) {
        mLooper = Looper.myLooper();
         if (mLooper == null) {
             throw new RuntimeException(
@@ -18,6 +19,7 @@
         }
         mQueue = mLooper.mQueue;
         mCallback = callback;
+   }
    ```
 
    通过Handler无参构造方法，默认获取的是当前线程ThreadLocal中的Looper对象，如果获取不到就会抛出异常，所以在子线程中，只要执行了`Looper.prepare()`方法，就可以有效的获取到Looper对象。
