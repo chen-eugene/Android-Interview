@@ -23,3 +23,30 @@
    ```
 
    通过Handler无参构造方法，默认获取的是当前线程ThreadLocal中的Looper对象，如果获取不到就会抛出异常，所以在子线程中，只要执行了`Looper.prepare()`方法，就可以有效的获取到Looper对象。
+   
+   在默认情况下，new Handler()获取的是当前线程的Looper，Handler对象就在当前线程中。当然也可以通过有参构造方法传入Looper对象，则Handler对象就属于Looper对象所在的线程中。
+
+#### 3、HandlerThread的使用场景和原理。
+
+   如果经常要开启线程和销毁线程，这无疑比较消耗性能，HandlerThread可以用来执行多个耗时操作，而不需要多次开启线程，里面是采用Handler+Looper实现的。
+   
+   ```
+      public void run() {
+        mTid = Process.myTid();
+        Looper.prepare();
+        synchronized (this) {
+            mLooper = Looper.myLooper();
+            notifyAll();
+        }
+        Process.setThreadPriority(mPriority);
+        onLooperPrepared();
+        Looper.loop();
+        mTid = -1;
+      }
+   ```
+   HandlerThread的run方法在新线程中创建Looper对象，并进行了关联。 在创建HandlerThread对象并调用其start方法之后，该HandlerThread线程就已经关联了looper对象（通过Looper.prepare()方法关联），并且该线程内部的消息队列循环了起来（通过Looper.loop()方法）。
+   
+   
+   
+   
+   
