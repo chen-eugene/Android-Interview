@@ -158,6 +158,11 @@ view.measure(widthMeasureSpec, heightMeasureSpec);
  - 插值器：设置属性值从初始值过渡到结束值的变化规律，即确定了动画变化的趋势，如匀加速，匀减速等。
  
  - 估值器：设置属性值从初始值过渡到结束值的变化具体数值，即确定了动画变化的具体效果。如修改颜色，大小等。
+ 
+ 
+#### 11、[RecyclerView和ListView复用机制。](https://www.jianshu.com/p/9306b365da57)
+
+ 
 
 
 
