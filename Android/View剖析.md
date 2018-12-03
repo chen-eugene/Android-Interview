@@ -162,6 +162,11 @@ view.measure(widthMeasureSpec, heightMeasureSpec);
  
 #### 11、[RecyclerView和ListView复用机制。](https://www.jianshu.com/p/9306b365da57)
 
+
+#### 12、处理滑动的几种方式，Scroller滑动的原理。
+
+ 
+
  
 
 
