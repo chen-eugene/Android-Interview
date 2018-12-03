@@ -165,9 +165,29 @@ view.measure(widthMeasureSpec, heightMeasureSpec);
 
 #### 12、处理滑动的几种方式，Scroller滑动的原理。
 
+ ![滑动冲突场景](https://github.com/chen-eugene/Interview/blob/master/image/1543826555.png)
  
+ - 场景1：外部滑动方向和内部滑动方向不一致。如ScrollView嵌套RecyclerView。
+ 
+  处理规则：当用户左右滑动时，需要让外部的View拦截事件，当用户上下滑动时，需要让内部的View拦截事件。
+ 
+ 
+ - 场景2：外部滑动方向和内部滑动方向一致。
+ 
+  处理规则：根据业务状态，来决定让那一层的View滑动。
+ 
+ - 场景3：场景1和场景2的嵌套。
 
+
+#### 13、简述工作线程更新UI的方法。
  
+ - 通过handler.sendMessage，更新UI主线程。
+ 
+ - 通过handler.post，更新UI主线程。
+ 
+ - 使用runOnUiThread，更新UI主线程。
+ 
+ - 通过view.post，更新UI主线程。
 
 
 
