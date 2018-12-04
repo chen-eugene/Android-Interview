@@ -12,13 +12,20 @@
 ### [三、View剖析](https://github.com/chen-eugene/Interview/blob/master/Android/View%E5%89%96%E6%9E%90.md)
 ### [四、文件系统]()
 ### 五、Framework
- - [Binder](https://github.com/chen-eugene/Interview/blob/master/Android/Binder.md)
- - [ActivityManagerService]()
- - [WindowManagerService]()
- - [PackageManagerService]()
- - [other](https://github.com/chen-eugene/Interview/blob/master/Android/other.md)
+ - [ⅰ Binder](https://github.com/chen-eugene/Interview/blob/master/Android/Binder.md)
+ - [ⅱ ActivityManagerService]()
+ - [ⅲ WindowManagerService]()
+ - [ⅳ PackageManagerService]()
+ - [ⅴ other](https://github.com/chen-eugene/Interview/blob/master/Android/other.md)
 
-### [六、性能优化](https://github.com/chen-eugene/Interview/blob/master/Android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96.md)
+### 六、性能优化
+ - [ⅰ 内存优化](https://github.com/chen-eugene/Interview/blob/master/Android/%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96.md)
+ - [ⅱ 流程优化](https://github.com/chen-eugene/Interview/blob/master/Android/%E6%B5%81%E7%A8%8B%E4%BC%98%E5%8C%96.md)
+ - [ⅲ RecyclerView优化](https://github.com/chen-eugene/Interview/blob/master/Android/RecyclerView%E4%BC%98%E5%8C%96.md)
+ - [ⅳ 其它](https://github.com/chen-eugene/Interview/blob/master/Android/%E5%85%B6%E5%AE%83.md)
+
+
+
 ### [七、热门技术](https://github.com/chen-eugene/Interview/blob/master/Android/%E7%83%AD%E9%97%A8%E6%8A%80%E6%9C%AF.md)
 ### [八、常用框架](https://github.com/chen-eugene/Interview/blob/master/Android/%E5%B8%B8%E7%94%A8%E6%A1%86%E6%9E%B6.md)
 ### [九、源码分析](https://github.com/chen-eugene/Interview/blob/master/Android/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90.xml)
