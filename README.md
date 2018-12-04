@@ -15,6 +15,7 @@
  - [Binder]()
  - [ActivityManagerService]()
  - [WindowManagerService]()
+ - [PackageManagerService]()
  - [other](https://github.com/chen-eugene/Interview/blob/master/Android/other.md)
 
 ### [六、性能优化](https://github.com/chen-eugene/Interview/blob/master/Android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96.md)
