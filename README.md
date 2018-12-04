@@ -21,7 +21,7 @@
 ### 六、性能优化
  - [ⅰ 内存优化](https://github.com/chen-eugene/Interview/blob/master/Android/%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96.md)
  - [ⅱ 流程优化](https://github.com/chen-eugene/Interview/blob/master/Android/%E6%B5%81%E7%A8%8B%E4%BC%98%E5%8C%96.md)
- - [ⅲ RecyclerView优化](https://github.com/chen-eugene/Interview/blob/master/Android/RecyclerView%E4%BC%98%E5%8C%96.md)
+ - [ⅲ View优化](https://github.com/chen-eugene/Interview/blob/master/Android/RecyclerView%E4%BC%98%E5%8C%96.md)
  - [ⅳ 其它](https://github.com/chen-eugene/Interview/blob/master/Android/%E5%85%B6%E5%AE%83.md)
 
 
