@@ -45,6 +45,44 @@
       }
    ```
    HandlerThread的run方法在新线程中创建Looper对象，并进行了关联。 在创建HandlerThread对象并调用其start方法之后，该HandlerThread线程就已经关联了looper对象（通过Looper.prepare()方法关联），并且该线程内部的消息队列循环了起来（通过Looper.loop()方法）。
+  
+#### 4、Android PendingIntent内部机制。
+
+
+#### 5、Android ART机制，与dalvik的区别，JIT与AOT的区别是什么？ART GC有什么改善，还有什么缺点。
+
+  **Dalvik：**
+  
+  Dalvik是Google公司自己设计用于Android平台的Java虚拟机，支持dex格式（Dalvik Executable）的Java应用程序的运行。dex格式是专门为Dalvik设计的一种压缩格式，适合内存和处理器速度有限的系统。
+  
+  **Dalvik虚拟机和Java虚拟机的区别**
+  
+  - Java虚拟机运行的是Java字节码，Dalvik虚拟机运行的是Dalvik字节码。
+  - Dalvik可执行文件体积小。Android SDK中有一个叫dx的工具负责将Java字节码转换为Dalvik字节码。
+  - Java虚拟机与Dalvik虚拟机架构不同。这也是Dalvik与JVM之间最大的区别。Java虚拟机基于栈架构，Dalvik虚拟机基于寄存器架构。
+  
+  **ART：**
+  
+  Dalvik是依靠一个Just-In-Time (JIT)编译器去解释字节码。开发者编译后的应用代码需要通过一个解释器在用户的设备上运行，这一机制并不高效，但让应用能更容易在不同硬件和架构上运行。ART则完全改变了这套做法，在应用安装时就预编译字节码到机器语言，这一机制叫Ahead-Of-Time (AOT）编译。在移除解释代码这一过程后，应用程序执行将更有效率，启动更快。
+  
+  **优点：**
+  
+   - 系统性能的显著提升。
+   - 应用启动更快、运行更快、体验更流畅、触感反馈更及时。
+
+  
+
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
    
    
    
