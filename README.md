@@ -28,8 +28,9 @@
 
 ### [七、热门技术](https://github.com/chen-eugene/Interview/blob/master/Android/%E7%83%AD%E9%97%A8%E6%8A%80%E6%9C%AF.md)
 ### [八、常用框架](https://github.com/chen-eugene/Interview/blob/master/Android/%E5%B8%B8%E7%94%A8%E6%A1%86%E6%9E%B6.md)
-### [九、源码分析](https://github.com/chen-eugene/Interview/blob/master/Android/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90.xml)
-### [十、经典案例实现](https://github.com/chen-eugene/Interview/blob/master/Android/%E5%8D%81%E3%80%81%E7%BB%8F%E5%85%B8%E6%A1%88%E4%BE%8B.md)
+### [九、架构设计]()
+### [十、源码分析](https://github.com/chen-eugene/Interview/blob/master/Android/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90.xml)
+### [十一、经典案例实现](https://github.com/chen-eugene/Interview/blob/master/Android/%E5%8D%81%E3%80%81%E7%BB%8F%E5%85%B8%E6%A1%88%E4%BE%8B.md)
 
 ## Other
 ### [设计模式](https://github.com/chen-eugene/Interview/blob/master/other/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F.md)
