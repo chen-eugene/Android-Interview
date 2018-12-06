@@ -35,10 +35,9 @@
    - Binder相对于传统的Socket方式，更加高效。Binder数据拷贝只需要一次，而管道、消息队列、Socket都需要2次，共享内存方式一次内存拷贝都不需要，但实现方式又比较复杂。
    - 传统的进程通信方式对于通信双方的身份并没有做出严格的验证，比如Socket通信的IP地址是客户端手动填入，很容易进行伪造。然而，Binder机制从协议本身就支持对通信双方做身份校检，从而大大提升了安全性。
    
-   ![binder](https://github.com/chen-eugene/Interview/blob/master/image/20160220005120410.png)
+   ![binder](https://github.com/chen-eugene/Interview/blob/master/image/20181206225009.png)
    
    Binder架构包括Server、Client和Binder驱动三个部分。
-   
    - Binder服务端：一个Binder服务端实际上就是Binder类的对象，该对象一旦创建，内部则会启动一个隐藏线程，会接收Binder驱动发送的消息，收到消息后，会执行Binder对象中的onTransact()函数，并按照该函数的参数执行不同的服务器端代码。onTransact函数的参数是客户端调用transact函数的输入。
    
    - Binder客户端：获取远程服务在Binder驱动中对应的mRemote引用，然后调用它的transact方法即可向服务端发送消息。
@@ -49,10 +48,15 @@
    
    - Service Manager：是一个守护进程，用来管理Server，并向Client提供查询Server接口的能力。
    
-   **Binder工作流程：**
+   **Binder驱动工作流程：**
+   - ① Binder驱动创建一块接受缓存区。
+   - ② 实现地址映射关系：即根据需要映射的接收进程信息，实现内核缓存区和接受进程用户空间地址同时映射到同一个共享接收缓存区中。
+   - ③ 发送进程通过系统调用copy_from_user发送数据到虚拟内存区域（数据拷贝1次）。
+   - ④ 由于内核缓存区和接收进程的用户空间地址存在映射关系（同时映射Binder创建的接收缓存区中），故相当于也发送到了接收进程的用户空间地址，即实现了跨进程通信。
    
-   - 
-   
+   **优点：**
+   - 传输效率：数据拷贝次数少（1次）、用户控件和内核空间可直接通过共享对象直接交互。
+   - 为接收进程飞陪了不确定大小的接收缓存区。
    
    **Binder客户端如何获取远程服务在Binder中的mRemote**
    
