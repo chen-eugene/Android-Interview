@@ -27,6 +27,10 @@
 
 #### [2、Binder是什么？它是如何实现跨进程通信的？（详细解释Binder机制。）](https://blog.csdn.net/carson_ho/article/details/73560642)
 
+  - 从机制、模型角度来说：Binder是一种跨进程(IPC)的方式，即Binder机制模型。
+  - 从模型的结构、组成来说：Binder是一种虚拟的物理设备驱动，即Binder驱动。连接Server进程、Client进程和ServerManager进程。
+  - Android源码角度：Binder是一个类，实现了IBinder接口。
+
    相比较于其他的IPC方式，如管道、SystemV、Socket等：
    - Binder相对于传统的Socket方式，更加高效。Binder数据拷贝只需要一次，而管道、消息队列、Socket都需要2次，共享内存方式一次内存拷贝都不需要，但实现方式又比较复杂。
    - 传统的进程通信方式对于通信双方的身份并没有做出严格的验证，比如Socket通信的IP地址是客户端手动填入，很容易进行伪造。然而，Binder机制从协议本身就支持对通信双方做身份校检，从而大大提升了安全性。
@@ -39,9 +43,17 @@
    
    - Binder客户端：获取远程服务在Binder驱动中对应的mRemote引用，然后调用它的transact方法即可向服务端发送消息。
    
-   - Binder驱动：任意一个服务端Binder对象被创建时，同时会在Binder驱动中创建一个mRemote对象，该对象也是一个Binder类。客户端访问远程服务端都是通过该mRemote对象。
+   - Binder驱动：连接Server进程、Client进程和ServerManager进程的桥梁。
+   
+    - 传递进程间的数据：通过内存映射的方式。
+    - 实现线程控制：采用Binder的线程池，并由Binder驱动自身进行管理。
    
    - Service Manager：是一个守护进程，用来管理Server，并向Client提供查询Server接口的能力。
+   
+   **Binder工作流程：**
+   
+   - 
+   
    
    **Binder客户端如何获取远程服务在Binder中的mRemote**
    
