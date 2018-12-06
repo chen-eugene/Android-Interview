@@ -44,7 +44,6 @@
    - Binder客户端：获取远程服务在Binder驱动中对应的mRemote引用，然后调用它的transact方法即可向服务端发送消息。
    
    - Binder驱动：连接Server进程、Client进程和ServerManager进程的桥梁。
-   
     - 传递进程间的数据：通过内存映射的方式。
     - 实现线程控制：采用Binder的线程池，并由Binder驱动自身进行管理。
    
