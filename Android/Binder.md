@@ -25,7 +25,7 @@
   
     - 不含任何活动应用组件的进程。
 
-#### 2、Binder是什么？它是如何实现跨进程通信的？（详细解释Binder机制。）
+#### [2、Binder是什么？它是如何实现跨进程通信的？（详细解释Binder机制。）](https://blog.csdn.net/carson_ho/article/details/73560642)
 
    相比较于其他的IPC方式，如管道、SystemV、Socket等：
    - Binder相对于传统的Socket方式，更加高效。Binder数据拷贝只需要一次，而管道、消息队列、Socket都需要2次，共享内存方式一次内存拷贝都不需要，但实现方式又比较复杂。
