@@ -25,7 +25,7 @@
   
     - 不含任何活动应用组件的进程。
 
-#### 2、详细解释Binder机制。
+#### 2、Binder是什么？它是如何实现跨进程通信的？（详细解释Binder机制。）
 
    相比较于其他的IPC方式，如管道、SystemV、Socket等：
    - Binder相对于传统的Socket方式，更加高效。Binder数据拷贝只需要一次，而管道、消息队列、Socket都需要2次，共享内存方式一次内存拷贝都不需要，但实现方式又比较复杂。
@@ -37,8 +37,44 @@
    
    - Binder服务端：一个Binder服务端实际上就是Binder类的对象，该对象一旦创建，内部则会启动一个隐藏线程，会接收Binder驱动发送的消息，收到消息后，会执行Binder对象中的onTransact()函数，并按照该函数的参数执行不同的服务器端代码。onTransact函数的参数是客户端调用transact函数的输入。
    
-   - 获取远程服务在Binder驱动中对应的mRemote引用，然后调用它的transact方法即可向服务端发送消息。
+   - Binder客户端：获取远程服务在Binder驱动中对应的mRemote引用，然后调用它的transact方法即可向服务端发送消息。
    
-   - 任意一个服务端Binder对象被创建时，同时会在Binder驱动中创建一个mRemote对象，该对象也是一个Binder类。客户端访问远程服务端都是通过该mRemote对象。
+   - Binder驱动：任意一个服务端Binder对象被创建时，同时会在Binder驱动中创建一个mRemote对象，该对象也是一个Binder类。客户端访问远程服务端都是通过该mRemote对象。
+   
+   - Service Manager：是一个守护进程，用来管理Server，并向Client提供查询Server接口的能力。
+   
+   **Binder客户端如何获取远程服务在Binder中的mRemote**
+   
+   - 系统服务是在系统启动的时候在SystemServer进程的init2函数中启动ServerThread线程，在这个线程中启动了各种服务，并且通过调用ServerManager.addService(String name, IBinder service)将其加入保存起来。ServerManager就相当于DNS服务器，在查找某个服务时通过调用ServerManager.getService(String name)函数就可以获得远程服务的Binder，至于它的具体细节可以查看Android启动相关的源代码。
+   
+   - 自定义的服务必须通过Service来实现。
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
    
    
