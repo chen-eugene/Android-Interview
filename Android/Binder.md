@@ -38,9 +38,9 @@
    ![binder](https://github.com/chen-eugene/Interview/blob/master/image/20181206225009.png)
    
    Binder架构包括Server、Client和Binder驱动三个部分。
-   - Binder服务端：一个Binder服务端实际上就是Binder类的对象，该对象一旦创建，内部则会启动一个隐藏线程，会接收Binder驱动发送的消息，收到消息后，会执行Binder对象中的onTransact()函数，并按照该函数的参数执行不同的服务器端代码。onTransact函数的参数是客户端调用transact函数的输入。
+   - Binder服务端：使用服务的进程。
    
-   - Binder客户端：获取远程服务在Binder驱动中对应的mRemote引用，然后调用它的transact方法即可向服务端发送消息。
+   - Binder客户端：提供服务的进程。
    
    - Binder驱动：连接Server进程、Client进程和ServerManager进程的桥梁。
     - 传递进程间的数据：通过内存映射的方式。
@@ -58,11 +58,12 @@
    - 传输效率：数据拷贝次数少（1次）、用户控件和内核空间可直接通过共享对象直接交互。
    - 为接收进程飞陪了不确定大小的接收缓存区。
    
-   **Binder客户端如何获取远程服务在Binder中的mRemote**
-   
-   - 系统服务是在系统启动的时候在SystemServer进程的init2函数中启动ServerThread线程，在这个线程中启动了各种服务，并且通过调用ServerManager.addService(String name, IBinder service)将其加入保存起来。ServerManager就相当于DNS服务器，在查找某个服务时通过调用ServerManager.getService(String name)函数就可以获得远程服务的Binder，至于它的具体细节可以查看Android启动相关的源代码。
-   
-   - 自定义的服务必须通过Service来实现。
+   **Binder请求的线程管理：**
+   - Server进程会创建很多线程来处理Binder请求。
+   - Binder模型的线程管理采用Binder驱动的线程池，并由Binder驱动自身进程管理，而不是由Server进程来管理的。
+   - 一个进程的Binder线程数默认最大是16，超过的请求会被阻塞等待空闲的Binder线程。
+    所以，在进程间通信时处理并发问题时，如使用ContentProvider时，它的CRUD（创建、检索、更新和删除）方法只能同时有16个线程同时工作。
+
    
    
    
