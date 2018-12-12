@@ -24,8 +24,13 @@
   - ⑥ 空进程：保留这种进程的的唯一目的是用作缓存，以缩短下次在其中运行组件所需的启动时间。
   
     - 不含任何活动应用组件的进程。
+    
+#### 2、进程间的通信方式。
 
-#### [2、Binder是什么？它是如何实现跨进程通信的？（详细解释Binder机制。）](https://blog.csdn.net/carson_ho/article/details/73560642)
+    
+
+
+#### [3、Binder是什么？它是如何实现跨进程通信的？（详细解释Binder机制。）](https://blog.csdn.net/carson_ho/article/details/73560642)
 
   - 从机制、模型角度来说：Binder是一种跨进程(IPC)的方式，即Binder机制模型。
   - 从模型的结构、组成来说：Binder是一种虚拟的物理设备驱动，即Binder驱动。连接Server进程、Client进程和ServerManager进程。
