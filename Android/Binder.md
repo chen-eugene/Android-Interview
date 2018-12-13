@@ -75,14 +75,29 @@
    - 一个进程的Binder线程数默认最大是16，超过的请求会被阻塞等待空闲的Binder线程。
     所以，在进程间通信时处理并发问题时，如使用ContentProvider时，它的CRUD（创建、检索、更新和删除）方法只能同时有16个线程同时工作。
     
+ **Binder机制情景分析：**
+  - [Service Manager是如何成为一个守护进程的？即Service Manager是如何告知Binder驱动程序它是Binder机制的上下文管理者。](https://blog.csdn.net/luoshengyang/article/details/6621566)
+   Service Manger、Client和Server三者分别是运行在独立的进程当中，它们之间的通信也属于进程间通信了，而且也是采用Binder机制进行进程间通信，因此，Service Manager在充当Binder机制的守护进程的角色的同时，也在充当Server的角色，是一种特殊的Server。
+   
+  - [Server和Client是如何获得Service Manager接口的？即defaultServiceManager接口是如何实现的。](https://blog.csdn.net/luoshengyang/article/details/6627260)
     
-#### 4、如何实现一个自定义的系统级服务。
+   - BpServiceManager：p是proxy即代理的意思，Bp就是BinderProxy，BpServiceManager，就是SM的Binder代理。既然是代理，那肯定希望对用户是透明的。对应的是C层的Binder代理。
+    
+  - [Server是如何把自己的服务启动起来的？Service Manager在Server启动的过程中是如何为Server提供服务的？即IServiceManager::addService接口是如何实现的。](https://blog.csdn.net/luoshengyang/article/details/6629298)
+  
+  - [Service Manager是如何为Client提供服务的？即IServiceManager::getService接口是如何实现的。](https://blog.csdn.net/luoshengyang/article/details/6633311)
+    
+#### [4、如何实现一个自定义的系统级服务。](https://blog.csdn.net/luoshengyang/article/details/6642463)
    aidl工具生成了三个类：IXXX、IXXX.Stub和IXXX.Stub.Proxy
    - IXXX：实现了android.os.IInterface，定义了通信接口。
    
    - IXXX.Stub：抽象类，继承了android.os.Binder，在服务端实现相应的接口，在客户端调用该类的静态方法`asInterface`获取一个Binder对象。如果Client和Server在同一个进程中，就直接返回服务端的Binder，接下来的调用就是直接用服务端的Binder调用服务端的程序，不存在IPC。否则的话，就将该IBinder(其实是BinderProxy类型了)包装成一个新的类Proxy类，接下来调用Proxy的stract方法实质上是用的Binder驱动中的远程Binder的引用mRemote来调用的，是IPC。
    
    - IXXX.Stub.Proxy：IBinder的代理类(其实是BinderProxy类型了)，在IPC中，Proxy的stract方法实质上是用的Binder驱动中的远程Binder的引用mRemote来调用的。
+
+  **定义系统服务：**
+  SystemServer对象是在系统启动的时候创建的，它被创建的时候会启动一个线程来创建HelloService，并且把它添加到Service Manager中去。
+
 
 
    
