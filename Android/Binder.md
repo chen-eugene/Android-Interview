@@ -34,6 +34,22 @@
   - AIDL：
     - 可以满足并发的需求。
     - Messenger只能通过Message来传递信息，有局限性，ADIL可以直接调用Server的方法。  
+    
+  **aidl工具生成了三个类：IXXX、IXXX.Stub和IXXX.Stub.Proxy**
+   - IXXX：实现了android.os.IInterface，定义了通信接口。
+   
+   - IXXX.Stub：抽象类，继承了android.os.Binder，在服务端实现相应的接口，在客户端调用该类的静态方法`asInterface`获取一个Binder对象。如果Client和Server在同一个进程中，就直接返回服务端的Binder，接下来的调用就是直接用服务端的Binder调用服务端的程序，不存在IPC。否则的话，就将该IBinder(其实是BinderProxy类型了)包装成一个新的类Proxy类，接下来调用Proxy的stract方法实质上是用的Binder驱动中的远程Binder的引用mRemote来调用的，是IPC。
+   
+   - IXXX.Stub.Proxy：IBinder的代理类(其实是BinderProxy类型了)，在IPC中，Proxy的stract方法实质上是用的Binder驱动中的远程Binder的引用mRemote来调用的。
+
+   **AIDL中的in，out，inout:**
+   所有的非基本参数都需要一个定向tag来指出数据流通的方式，不管是 in , out , 还是 inout 。基本参数的定向tag默认是并且只能是 in 。
+   
+   
+   
+   
+   
+
 
 
 #### [3、Binder是什么？它是如何实现跨进程通信的？（详细解释Binder机制。）](https://blog.csdn.net/carson_ho/article/details/73560642)
@@ -88,14 +104,6 @@
   - [Service Manager是如何为Client提供服务的？即IServiceManager::getService接口是如何实现的。](https://blog.csdn.net/luoshengyang/article/details/6633311)
     
 #### [4、如何实现一个自定义的系统级服务。](https://blog.csdn.net/luoshengyang/article/details/6642463)
-   aidl工具生成了三个类：IXXX、IXXX.Stub和IXXX.Stub.Proxy
-   - IXXX：实现了android.os.IInterface，定义了通信接口。
-   
-   - IXXX.Stub：抽象类，继承了android.os.Binder，在服务端实现相应的接口，在客户端调用该类的静态方法`asInterface`获取一个Binder对象。如果Client和Server在同一个进程中，就直接返回服务端的Binder，接下来的调用就是直接用服务端的Binder调用服务端的程序，不存在IPC。否则的话，就将该IBinder(其实是BinderProxy类型了)包装成一个新的类Proxy类，接下来调用Proxy的stract方法实质上是用的Binder驱动中的远程Binder的引用mRemote来调用的，是IPC。
-   
-   - IXXX.Stub.Proxy：IBinder的代理类(其实是BinderProxy类型了)，在IPC中，Proxy的stract方法实质上是用的Binder驱动中的远程Binder的引用mRemote来调用的。
-
-  **定义系统服务：**
   SystemServer对象是在系统启动的时候创建的，它被创建的时候会启动一个线程来创建HelloService，并且把它添加到Service Manager中去。
 
 
