@@ -6,14 +6,24 @@ AMS是Android中最核心的服务，主要负责系统中四大组件的启动�
   - 属于系统进程的一部分。
 
 相关类：
-  - ActivityStack.java:其实是个管理类，管理activity的各种状态
-  - ActivityRecord.java:ActivityStack的管理对象，每个Activity在AMS对应一个ActivityRecord，来记录Activity的状态以及其他的管理信息。其实就是服务器端的Activity对象的映像
-  - ActivityThread.java:主线程，类中有main方法。
-  - H.java:Handler子类。
-  - Instrumentation.java:这个东西我把它理解为ActivityThread的一个工具类，也算是一个劳动者吧，对于生命周期的所有操作例如onCreate最终都是直接由它来执行的。对于hook和测试会用到这个类。
+  - ActivityStack.java：其实是个管理类，管理activity的各种状态
+  - ActivityRecord.java：ActivityStack的管理对象，每个Activity在AMS对应一个ActivityRecord，来记录Activity的状态以及其他的管理信息。其实就是服务器端的Activity对象的映像
+  - ActivityThread.java：主线程，类中有main方法。
+  - H.java：Handler子类。
+  - Instrumentation.java：可以理解为ActivityThread的一个工具类，用来监控应用程序和系统的交互，对于生命周期的所有操作例如onCreate最终都是直接由它来执行的。对于hook和测试会用到这个类。
   - ApplicationThread.java:用来实现ActivityManagerService与ActivityThread之间的交互。在ActivityManagerService需要管理相关Application中的Activity的生命周期时，通过ApplicationThread的代理对象与ActivityThread通讯。
 
-#### [1、Android应用程序的启动过程](https://blog.csdn.net/luoshengyang/article/details/6747696)
+#### [1、Android应用程序的启动过程](https://blog.csdn.net/luoshengyang/article/details/6689748)
+
+  - ① 论是通过Launcher来启动Activity，还是通过Activity内部调用startActivity方法来启动新的Activity，都通过Binder进程间通信进入到ActivityManagerService进程中，并且调用ActivityManagerService.startActivity方法。
+  - ② 通过桌面快捷方式获取Intent，向Intent中添加`Intent.FLAG_ACATIVITY_NEW_TASK`，最终调用到ActivityManagerService.startActivity方法。
+  - ③ 解析Intent内容，包括类名、启动模式等。
+    - 如果启动模式为singleTask，就回去查找是否存在Activity相关联的Task没有就从新创建；
+    - 如果启动模式为singleInstance，就会去查找是否存在要启动的Activity实例，如果没有，就创建一个新的Task。
+    - 新创建的Task被添加到了ActivityManagerService中。
+  - ④ 判断当前栈顶的Activity是否为即将启动的Activity，如果是，就不会在重新创建一个Activity实例。
+
+#### [2、Android应用进程的启动过程](https://blog.csdn.net/luoshengyang/article/details/6747696)
   
   - Android应用程序进程的入口函数是`ActivityThread.main`，即进程创建完成之后，Android应用程序框架层就会在这个进程中将ActivityThread类加载进来，然后执行它的main函数，这个main函数就是进程执行消息循环的地方了。
   
