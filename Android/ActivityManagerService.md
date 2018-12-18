@@ -12,3 +12,17 @@ AMS是Android中最核心的服务，主要负责系统中四大组件的启动�
   - H.java:Handler子类。
   - Instrumentation.java:这个东西我把它理解为ActivityThread的一个工具类，也算是一个劳动者吧，对于生命周期的所有操作例如onCreate最终都是直接由它来执行的。对于hook和测试会用到这个类。
   - ApplicationThread.java:用来实现ActivityManagerService与ActivityThread之间的交互。在ActivityManagerService需要管理相关Application中的Activity的生命周期时，通过ApplicationThread的代理对象与ActivityThread通讯。
+
+#### [1、Android应用程序的启动过程](https://blog.csdn.net/luoshengyang/article/details/6747696)
+  
+  - Android应用程序进程的入口函数是`ActivityThread.main`，即进程创建完成之后，Android应用程序框架层就会在这个进程中将ActivityThread类加载进来，然后执行它的main函数，这个main函数就是进程执行消息循环的地方了。
+  
+  - Android应用进程天然支持Binder进程间通信。当我们在Android应用程序中实现Server组件的时候，我们并没有让进程进入一个循环中去等待Client组件的请求，然而，当Client组件得到这个Server组件的远程接口时，却可以顺利地和Server组件进行进程间通信，这就是因为Android应用程序进程在创建的时候就已经启动了一个线程池来支持Server组件和Binder驱动程序之间的交互了，这样，极大地方便了在Android应用程序中创建Server组件。
+
+#### [2、Launcher启动过程](https://blog.csdn.net/luoshengyang/article/details/6767736)
+
+  
+
+
+
+
