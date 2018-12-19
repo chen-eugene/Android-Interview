@@ -65,7 +65,14 @@ StringBuilder是Java5新增的一个StringBuffer的替代类，它不是线程�
 - 在序列化过程中，虚拟机会试图调用对象类里的 writeObject 和 readObject 方法，进行用户自定义的序列化和反序列化，如果没有这样的方法，则默认调用是 ObjectOutputStream 的 defaultWriteObject 方法以及 ObjectInputStream 的 defaultReadObject 方法。用户自定义的 writeObject 和 readObject 方法可以允许用户控制序列化的过程，比如可以在序列化的过程中动态改变序列化的数值。基于这个原理，可以在实际应用中得到使用，用于敏感字段的加密工作。
 - Java 序列化机制为了节省磁盘空间，具有特定的存储规则，当写入文件的为同一对象时，并不会再将对象的内容进行存储，而只是再次存储一份引用。
 
-#### [8、try catch finally，try里有return，finally还执行么。](http://www.cnblogs.com/lanxuezaipiao/p/3440471.html#top)
+#### [8、序列化Serializable和Parcelable的区别。](https://blog.csdn.net/SilenceOO/article/details/73469237)
+  
+  - Parcelable方式的实现原理是将一个完整的对象进行分解，而分解后的每一部分都是Intent所支持的数据类型，这样也就实现传递对象的功能了。
+  - Parcelable的性能比Serializable好，因为后者在反射过程频繁GC，所以在内存间数据传输时推荐使用Parcelable，如activity间传输数据。
+  - Serializable可将数据持久化方便保存，所以在需要保存或网络传输数据时选择Serializable，因为android不同版本Parcelable可能不同，所以不推荐使用Parcelable进行数据持久化。
+  - Parcelable不能使用在要将数据存储在磁盘上的情况，因为Parcelable不能很好的保证数据的持续性在外界有变化的情况下。尽管Serializable效率低点，但此时还是建议使用Serializable 。
+
+#### [9、try catch finally，try里有return，finally还执行么。](http://www.cnblogs.com/lanxuezaipiao/p/3440471.html#top)
 总结：
  - try语句没有被执行到，如在try语句之前就返回了，这样finally语句就不会执行，这也说明了finally语句被执行的必要而非充分条件是：相应的try语句一定被执行到。
  - 在try块中有System.exit(0);这样的语句，System.exit(0);是终止Java虚拟机JVM的，连JVM都停止了，所有都结束了，当然finally语句也不会被执行到。
@@ -75,7 +82,7 @@ StringBuilder是Java5新增的一个StringBuffer的替代类，它不是线程�
 - try块里的return语句在异常的情况下不会被执行，这样具体返回哪个看情况。
 - 当发生异常后，catch中的return执行情况与未发生异常时try中return的执行情况完全一样。
 
-#### 9、Java异常分类
+#### 10、Java异常分类
 ![异常分类](https://github.com/chen-eugene/Interview/blob/master/image/1354020417_5176.jpg)
 
 - Error：是程序无法处理的错误，表示运行应用程序中较严重问题，如ava虚拟机运行错误（Virtual MachineError）、内存溢出（OutOfMemoryError）等，这些错误表示故障发生于虚拟机自身、或者发生在虚拟机试图执行应用时。 
