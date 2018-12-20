@@ -21,7 +21,13 @@ AMS是Android中最核心的服务，主要负责系统中四大组件的启动�
     - 如果启动模式为singleTask，就回去查找是否存在Activity相关联的Task没有就从新创建；
     - 如果启动模式为singleInstance，就会去查找是否存在要启动的Activity实例，如果没有，就创建一个新的Task。
     - 新创建的Task被添加到了ActivityManagerService中。
-  - ④ 判断当前栈顶的Activity是否为即将启动的Activity，如果是，就不会在重新创建一个Activity实例。
+  - ④ 获取栈顶的Activity是否为即将激动的Activity，如果是，就不会在重新创建一个Activity。否则就将要启动的Activity的ActivityRecord存入栈中。
+  - ⑤ 继续判断要启动的Activity是否为Resumed状态，如果是的话就不做任何操作。
+  - ⑥ 通过当前状态为Resumed的Activity所在的进程的ApplicationThread对象，来通知Resumed状态的Activity（即Launcher）进入Paused状态。
+  - ⑦ 根据清单文件的Application的process属性，系统默认使用package的名称，去查找进程是否存在，由于是第一次启动程序，所以会创建一个新的进程。并且执行到ActivityThread的mian函数，创建一个ActivityThread实例，每一个应用程序都有一个ActivityThread实例与之对应。
+  - ⑧ 通知ActivityManagerService来正真启动一个Activity，并且回调对应的生命周期函数，在客户端创建一个正真的Activity实例（前面栈中保存的都是ActivityRecord）。
+  
+  
 
 #### [2、Android应用进程的启动过程](https://blog.csdn.net/luoshengyang/article/details/6747696)
   
