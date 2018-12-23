@@ -14,10 +14,7 @@
  - [ⅰ Binder](https://github.com/chen-eugene/Interview/blob/master/Android/Binder.md)
  - [ⅱ 资源管理框架](https://github.com/chen-eugene/Interview/blob/master/Android/%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86%E6%A1%86%E6%9E%B6.md)
  - [ⅲ Android系统整体流程](https://github.com/chen-eugene/Interview/blob/master/Android/Android%E7%B3%BB%E7%BB%9F%E6%95%B4%E4%BD%93%E6%B5%81%E7%A8%8B.md)
- - [ⅱ ActivityManagerService](https://github.com/chen-eugene/Interview/blob/master/Android/ActivityManagerService.md)
- - [ⅲ WindowManagerService]()
- - [ⅳ PackageManagerService](https://github.com/chen-eugene/Interview/blob/master/Android/PackageManagerService.md)
- - [ⅴ other](https://github.com/chen-eugene/Interview/blob/master/Android/other.md)
+ - [Ⅳ other](https://github.com/chen-eugene/Interview/blob/master/Android/other.md)
 
 ### 五、性能优化
  - [ⅰ 内存优化](https://github.com/chen-eugene/Interview/blob/master/Android/%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96.md)
