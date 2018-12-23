@@ -13,6 +13,8 @@
 ### [四、资源管理框架](https://github.com/chen-eugene/Interview/blob/master/Android/%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86%E6%A1%86%E6%9E%B6.md)
 ### 五、Framework
  - [ⅰ Binder](https://github.com/chen-eugene/Interview/blob/master/Android/Binder.md)
+ - [ⅱ 资源管理框架](https://github.com/chen-eugene/Interview/blob/master/Android/%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86%E6%A1%86%E6%9E%B6.md)
+ - [ⅲ Android系统整体流程]()
  - [ⅱ ActivityManagerService](https://github.com/chen-eugene/Interview/blob/master/Android/ActivityManagerService.md)
  - [ⅲ WindowManagerService]()
  - [ⅳ PackageManagerService](https://github.com/chen-eugene/Interview/blob/master/Android/PackageManagerService.md)
