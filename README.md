@@ -10,29 +10,26 @@
 ### [一、Android基础](https://github.com/chen-eugene/Interview/blob/master/Android/Android%E5%9F%BA%E7%A1%80.md)
 ### [二、四大组件相关](https://github.com/chen-eugene/Interview/blob/master/Android/%E5%9B%9B%E5%A4%A7%E7%BB%84%E4%BB%B6%E7%9B%B8%E5%85%B3.md)
 ### [三、View剖析](https://github.com/chen-eugene/Interview/blob/master/Android/View%E5%89%96%E6%9E%90.md)
-### [四、资源管理框架](https://github.com/chen-eugene/Interview/blob/master/Android/%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86%E6%A1%86%E6%9E%B6.md)
-### 五、Framework
+### 四、Framework
  - [ⅰ Binder](https://github.com/chen-eugene/Interview/blob/master/Android/Binder.md)
  - [ⅱ 资源管理框架](https://github.com/chen-eugene/Interview/blob/master/Android/%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86%E6%A1%86%E6%9E%B6.md)
- - [ⅲ Android系统整体流程]()
+ - [ⅲ Android系统整体流程](https://github.com/chen-eugene/Interview/blob/master/Android/Android%E7%B3%BB%E7%BB%9F%E6%95%B4%E4%BD%93%E6%B5%81%E7%A8%8B.md)
  - [ⅱ ActivityManagerService](https://github.com/chen-eugene/Interview/blob/master/Android/ActivityManagerService.md)
  - [ⅲ WindowManagerService]()
  - [ⅳ PackageManagerService](https://github.com/chen-eugene/Interview/blob/master/Android/PackageManagerService.md)
  - [ⅴ other](https://github.com/chen-eugene/Interview/blob/master/Android/other.md)
 
-### 六、性能优化
+### 五、性能优化
  - [ⅰ 内存优化](https://github.com/chen-eugene/Interview/blob/master/Android/%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96.md)
  - [ⅱ 流程优化](https://github.com/chen-eugene/Interview/blob/master/Android/%E6%B5%81%E7%A8%8B%E4%BC%98%E5%8C%96.md)
  - [ⅲ View优化](https://github.com/chen-eugene/Interview/blob/master/Android/RecyclerView%E4%BC%98%E5%8C%96.md)
  - [ⅳ 其它](https://github.com/chen-eugene/Interview/blob/master/Android/%E5%85%B6%E5%AE%83.md)
 
-
-
-### [七、热门技术](https://github.com/chen-eugene/Interview/blob/master/Android/%E7%83%AD%E9%97%A8%E6%8A%80%E6%9C%AF.md)
-### [八、常用框架](https://github.com/chen-eugene/Interview/blob/master/Android/%E5%B8%B8%E7%94%A8%E6%A1%86%E6%9E%B6.md)
-### [九、架构设计](https://github.com/chen-eugene/Interview/blob/master/Android/%E4%B9%9D%E3%80%81%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1.md)
-### [十、源码分析](https://github.com/chen-eugene/Interview/blob/master/Android/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90.xml)
-### [十一、经典案例实现](https://github.com/chen-eugene/Interview/blob/master/Android/%E5%8D%81%E3%80%81%E7%BB%8F%E5%85%B8%E6%A1%88%E4%BE%8B.md)
+### [六、热门技术](https://github.com/chen-eugene/Interview/blob/master/Android/%E7%83%AD%E9%97%A8%E6%8A%80%E6%9C%AF.md)
+### [七、常用框架](https://github.com/chen-eugene/Interview/blob/master/Android/%E5%B8%B8%E7%94%A8%E6%A1%86%E6%9E%B6.md)
+### [八、架构设计](https://github.com/chen-eugene/Interview/blob/master/Android/%E4%B9%9D%E3%80%81%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1.md)
+### [九、源码分析](https://github.com/chen-eugene/Interview/blob/master/Android/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90.xml)
+### [十、经典案例实现](https://github.com/chen-eugene/Interview/blob/master/Android/%E5%8D%81%E3%80%81%E7%BB%8F%E5%85%B8%E6%A1%88%E4%BE%8B.md)
 
 ## Other
 ### [设计模式](https://github.com/chen-eugene/Interview/blob/master/other/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F.md)
