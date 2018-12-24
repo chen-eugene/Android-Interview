@@ -1,4 +1,4 @@
-#### 1、	怎么解决RecyclerView刷新闪烁问题。
+#### [1、	怎么解决RecyclerView刷新闪烁问题。](http://www.codexiu.cn/android/blog/24953/)
 
 #### 2、	ListView的卡顿优化、资讯流懒加载如何实现。
 
