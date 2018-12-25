@@ -145,10 +145,16 @@ String S1 = S2 +S3 + S4;
 #### [10、Exception与Error类结构，Exception与Error的区别。(Java异常分类)](https://blog.csdn.net/hguisu/article/details/6155636)
 ![异常分类](https://github.com/chen-eugene/Interview/blob/master/image/1354020417_5176.jpg)
 
-  - Error：是程序无法处理的错误，表示运行应用程序中较严重问题，如ava虚拟机运行错误（Virtual MachineError）、内存溢出（OutOfMemoryError）等，这些错误表示故障发生于虚拟机自身、或者发生在虚拟机试图执行应用时。 
+  - Error：是程序无法处理的错误，表示运行应用程序中较严重问题，如ava虚拟机运行错误（Virtual MachineError）、内存溢出（OutOfMemoryError）等，这些错误表示故障发生于虚拟机自身、或者发生在虚拟机试图执行应用时。 这些异常发生时，Java虚拟机（JVM）一般会选择线程终止。
+  
   - Exception（异常）:是程序本身可以处理的异常。
+    - 运行时异常：都是RuntimeException类及其子类异常，如NullPointerException(空指针异常)、IndexOutOfBoundsException(下标越界异常)等，这些异常是不检查异常，程序中可以选择捕获处理，也可以不处理。 
+    - 非运行时异常 （编译异常）：是RuntimeException以外的异常，如IOException、SQLException，类型上都属于Exception类及其子类，从程序语法角度讲是必须进行处理的异常，如果不处理，程序就不能编译通过。 
 
-  - 运行时异常：都是RuntimeException类及其子类异常，如NullPointerException(空指针异常)、IndexOutOfBoundsException(下标越界异常)等，这些异常是不检查异常，程序中可以选择捕获处理，也可以不处理。 
-  - 非运行时异常 （编译异常）：是RuntimeException以外的异常，如IOException、SQLException，类型上都属于Exception类及其子类，从程序语法角度讲是必须进行处理的异常，如果不处理，程序就不能编译通过。 
+  在以下4种特殊情况下，finally块不会被执行：
+    - 在finally语句块中发生了异常。
+    - 在前面的代码中用了System.exit()退出程序。
+    - 程序所在的线程死亡。
+    - 关闭CPU。  
 
 
