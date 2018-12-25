@@ -101,39 +101,38 @@ String S1 = S2 +S3 + S4;
 
   肯定是不可以的，因为不同的对象可能会生成相同的hashcode值,即所谓的hash碰撞。虽然不能根据hashcode值判断两个对象是否相等，但是可以直接根据hashcode值判断两个对象不等，如果两个对象的hashcode值不等，则必定是两个不同的对象。如果要判断两个对象是否真正相等，必须通过equals方法。
 
-- 也就是说对于两个对象，如果调用equals方法得到的结果为true，则两个对象的hashcode值必定相等；
-
-- 如果equals方法得到的结果为false，则两个对象的hashcode值不一定不同；
-
-- 如果两个对象的hashcode值不等，则equals方法得到的结果必定为false；
-
-- 如果两个对象的hashcode值相等，则equals方法得到的结果未知。
+  - 也就是说对于两个对象，如果调用equals方法得到的结果为true，则两个对象的hashcode值必定相等；
+  - 如果equals方法得到的结果为false，则两个对象的hashcode值不一定不同；
+  - 如果两个对象的hashcode值不等，则equals方法得到的结果必定为false；
+  - 如果两个对象的hashcode值相等，则equals方法得到的结果未知。
 
 在重写equals方法的同时，必须重写hashCode方法，因为默认情况下，hashCode方法是将对象的存储地址进行映射。
 
+#### 10、fianl关键字的作用。
+   
+   - 对于一个final变量，如果是基本数据类型的变量，则其数值一旦在初始化之后便不能更改；如果是引用类型的变量，则在对其初始化之后便不能再让其指向另一个对象。
+   - 当用final修饰一个类时，表明这个类不能被继承。final类中的所有成员方法都会被隐式地指定为final方法。
+   - 使用final方法的原因有两个。第一个原因是把方法锁定，以防任何继承类修改它的含义；第二个原因是效率。在早期的Java实现版本中，会将final方法转为内嵌调用。但是如果方法过于庞大，可能看不到内嵌调用带来的任何性能提升（现在的Java版本已经不需要使用final方法进行这些优化了）。类中所有的private方法都隐式地指定为final。
 
-  
-##### 5、	什么是面向接口编程，它有什么好处。
+#### [10、什么是序列化，序列化前后对象有何区别。](https://www.ibm.com/developerworks/cn/java/j-lo-serial/index.html)
 
-
-
-#### [7、什么是序列化，序列化前后对象有何区别。](https://www.ibm.com/developerworks/cn/java/j-lo-serial/index.html)
 序列化：表示将一个对象转换成可存储或可传输的状态。序列化后的对象可以在网络上进行传输，也可以存储到本地。
-- **虚拟机是否允许反序列化，不仅取决于类路径和功能代码是否相同，更重要的是两个类的序列化 ID 是否相同（serialVersionUID）。**
-- **序列化保存的是对象的状态，静态变量属于类的状态，因此 序列化并不保存静态变量。**
-- 要想将父类对象也序列化，就需要让父类也实现Serializable 接口。如果父类不实现的话的，就需要有默认的无参的构造函数。
-- Transient 关键字的作用是控制变量的序列化，在变量声明前加上该关键字，可以阻止该变量被序列化到文件中，在被反序列化后，transient 变量的值被设为初始值，如 int 型的是 0，对象型的是 null。
-- 在序列化过程中，虚拟机会试图调用对象类里的 writeObject 和 readObject 方法，进行用户自定义的序列化和反序列化，如果没有这样的方法，则默认调用是 ObjectOutputStream 的 defaultWriteObject 方法以及 ObjectInputStream 的 defaultReadObject 方法。用户自定义的 writeObject 和 readObject 方法可以允许用户控制序列化的过程，比如可以在序列化的过程中动态改变序列化的数值。基于这个原理，可以在实际应用中得到使用，用于敏感字段的加密工作。
-- Java 序列化机制为了节省磁盘空间，具有特定的存储规则，当写入文件的为同一对象时，并不会再将对象的内容进行存储，而只是再次存储一份引用。
 
-#### [8、序列化Serializable和Parcelable的区别。](https://blog.csdn.net/SilenceOO/article/details/73469237)
+  - **虚拟机是否允许反序列化，不仅取决于类路径和功能代码是否相同，更重要的是两个类的序列化 ID 是否相同（serialVersionUID）。**
+  - **序列化保存的是对象的状态，静态变量属于类的状态，因此 序列化并不保存静态变量。**
+  - 要想将父类对象也序列化，就需要让父类也实现Serializable 接口。如果父类不实现的话的，就需要有默认的无参的构造函数。
+  - Transient 关键字的作用是控制变量的序列化，在变量声明前加上该关键字，可以阻止该变量被序列化到文件中，在被反序列化后，transient 变量的值被设为初始值，如 int 型的是 0，对象型的是 null。
+  - 在序列化过程中，虚拟机会试图调用对象类里的 writeObject 和 readObject 方法，进行用户自定义的序列化和反序列化，如果没有这样的方法，则默认调用是 ObjectOutputStream 的 defaultWriteObject 方法以及 ObjectInputStream 的 defaultReadObject 方法。用户自定义的 writeObject 和 readObject 方法可以允许用户控制序列化的过程，比如可以在序列化的过程中动态改变序列化的数值。基于这个原理，可以在实际应用中得到使用，用于敏感字段的加密工作。
+  - Java 序列化机制为了节省磁盘空间，具有特定的存储规则，当写入文件的为同一对象时，并不会再将对象的内容进行存储，而只是再次存储一份引用。
+
+#### [11、序列化Serializable和Parcelable的区别。](https://blog.csdn.net/SilenceOO/article/details/73469237)
   
   - Parcelable方式的实现原理是将一个完整的对象进行分解，而分解后的每一部分都是Intent所支持的数据类型，这样也就实现传递对象的功能了。
   - Parcelable的性能比Serializable好，因为后者在反射过程频繁GC，所以在内存间数据传输时推荐使用Parcelable，如activity间传输数据。
   - Serializable可将数据持久化方便保存，所以在需要保存或网络传输数据时选择Serializable，因为android不同版本Parcelable可能不同，所以不推荐使用Parcelable进行数据持久化。
   - Parcelable不能使用在要将数据存储在磁盘上的情况，因为Parcelable不能很好的保证数据的持续性在外界有变化的情况下。尽管Serializable效率低点，但此时还是建议使用Serializable 。
 
-#### [9、try catch finally，try里有return，finally还执行么。](http://www.cnblogs.com/lanxuezaipiao/p/3440471.html#top)
+#### [12、try catch finally，try里有return，finally还执行么。](http://www.cnblogs.com/lanxuezaipiao/p/3440471.html#top)
 总结：
  - try语句没有被执行到，如在try语句之前就返回了，这样finally语句就不会执行，这也说明了finally语句被执行的必要而非充分条件是：相应的try语句一定被执行到。
  - 在try块中有System.exit(0);这样的语句，System.exit(0);是终止Java虚拟机JVM的，连JVM都停止了，所有都结束了，当然finally语句也不会被执行到。
@@ -146,8 +145,8 @@ String S1 = S2 +S3 + S4;
 #### [10、Exception与Error类结构，Exception与Error的区别。(Java异常分类)](https://blog.csdn.net/hguisu/article/details/6155636)
 ![异常分类](https://github.com/chen-eugene/Interview/blob/master/image/1354020417_5176.jpg)
 
-- Error：是程序无法处理的错误，表示运行应用程序中较严重问题，如ava虚拟机运行错误（Virtual MachineError）、内存溢出（OutOfMemoryError）等，这些错误表示故障发生于虚拟机自身、或者发生在虚拟机试图执行应用时。 
-- Exception（异常）:是程序本身可以处理的异常。
+  - Error：是程序无法处理的错误，表示运行应用程序中较严重问题，如ava虚拟机运行错误（Virtual MachineError）、内存溢出（OutOfMemoryError）等，这些错误表示故障发生于虚拟机自身、或者发生在虚拟机试图执行应用时。 
+  - Exception（异常）:是程序本身可以处理的异常。
 
   - 运行时异常：都是RuntimeException类及其子类异常，如NullPointerException(空指针异常)、IndexOutOfBoundsException(下标越界异常)等，这些异常是不检查异常，程序中可以选择捕获处理，也可以不处理。 
   - 非运行时异常 （编译异常）：是RuntimeException以外的异常，如IOException、SQLException，类型上都属于Exception类及其子类，从程序语法角度讲是必须进行处理的异常，如果不处理，程序就不能编译通过。 
