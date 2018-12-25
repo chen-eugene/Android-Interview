@@ -114,7 +114,7 @@ String S1 = S2 +S3 + S4;
    - 当用final修饰一个类时，表明这个类不能被继承。final类中的所有成员方法都会被隐式地指定为final方法。
    - 使用final方法的原因有两个。第一个原因是把方法锁定，以防任何继承类修改它的含义；第二个原因是效率。在早期的Java实现版本中，会将final方法转为内嵌调用。但是如果方法过于庞大，可能看不到内嵌调用带来的任何性能提升（现在的Java版本已经不需要使用final方法进行这些优化了）。类中所有的private方法都隐式地指定为final。
 
-#### [10、什么是序列化，序列化前后对象有何区别。](https://www.ibm.com/developerworks/cn/java/j-lo-serial/index.html)
+#### [11、什么是序列化，序列化前后对象有何区别。](https://www.ibm.com/developerworks/cn/java/j-lo-serial/index.html)
 
 序列化：表示将一个对象转换成可存储或可传输的状态。序列化后的对象可以在网络上进行传输，也可以存储到本地。
 
@@ -125,14 +125,14 @@ String S1 = S2 +S3 + S4;
   - 在序列化过程中，虚拟机会试图调用对象类里的 writeObject 和 readObject 方法，进行用户自定义的序列化和反序列化，如果没有这样的方法，则默认调用是 ObjectOutputStream 的 defaultWriteObject 方法以及 ObjectInputStream 的 defaultReadObject 方法。用户自定义的 writeObject 和 readObject 方法可以允许用户控制序列化的过程，比如可以在序列化的过程中动态改变序列化的数值。基于这个原理，可以在实际应用中得到使用，用于敏感字段的加密工作。
   - Java 序列化机制为了节省磁盘空间，具有特定的存储规则，当写入文件的为同一对象时，并不会再将对象的内容进行存储，而只是再次存储一份引用。
 
-#### [11、序列化Serializable和Parcelable的区别。](https://blog.csdn.net/SilenceOO/article/details/73469237)
+#### [12、序列化Serializable和Parcelable的区别。](https://blog.csdn.net/SilenceOO/article/details/73469237)
   
   - Parcelable方式的实现原理是将一个完整的对象进行分解，而分解后的每一部分都是Intent所支持的数据类型，这样也就实现传递对象的功能了。
   - Parcelable的性能比Serializable好，因为后者在反射过程频繁GC，所以在内存间数据传输时推荐使用Parcelable，如activity间传输数据。
   - Serializable可将数据持久化方便保存，所以在需要保存或网络传输数据时选择Serializable，因为android不同版本Parcelable可能不同，所以不推荐使用Parcelable进行数据持久化。
   - Parcelable不能使用在要将数据存储在磁盘上的情况，因为Parcelable不能很好的保证数据的持续性在外界有变化的情况下。尽管Serializable效率低点，但此时还是建议使用Serializable 。
 
-#### [12、try catch finally，try里有return，finally还执行么。](http://www.cnblogs.com/lanxuezaipiao/p/3440471.html#top)
+#### [13、try catch finally，try里有return，finally还执行么。](http://www.cnblogs.com/lanxuezaipiao/p/3440471.html#top)
 总结：
  - try语句没有被执行到，如在try语句之前就返回了，这样finally语句就不会执行，这也说明了finally语句被执行的必要而非充分条件是：相应的try语句一定被执行到。
  - 在try块中有System.exit(0);这样的语句，System.exit(0);是终止Java虚拟机JVM的，连JVM都停止了，所有都结束了，当然finally语句也不会被执行到。
@@ -142,7 +142,7 @@ String S1 = S2 +S3 + S4;
 - try块里的return语句在异常的情况下不会被执行，这样具体返回哪个看情况。
 - 当发生异常后，catch中的return执行情况与未发生异常时try中return的执行情况完全一样。
 
-#### [10、Exception与Error类结构，Exception与Error的区别。(Java异常分类)](https://blog.csdn.net/hguisu/article/details/6155636)
+#### [14、Exception与Error类结构，Exception与Error的区别。(Java异常分类)](https://blog.csdn.net/hguisu/article/details/6155636)
 ![异常分类](https://github.com/chen-eugene/Interview/blob/master/image/1354020417_5176.jpg)
 
   - Error：是程序无法处理的错误，表示运行应用程序中较严重问题，如ava虚拟机运行错误（Virtual MachineError）、内存溢出（OutOfMemoryError）等，这些错误表示故障发生于虚拟机自身、或者发生在虚拟机试图执行应用时。 这些异常发生时，Java虚拟机（JVM）一般会选择线程终止。
