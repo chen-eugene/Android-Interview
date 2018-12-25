@@ -26,7 +26,13 @@
   - JRE：Java运行环境，用于运行java程序。
   - JVM：当运行一个程序时，JVM 负责将字节码转换为特定机器代码。JVM 提供了内存管理/垃圾回收和安全机制等。这种独立于硬件和操作系统时的Java具有跨平台的特性。
   
-#### 4、	String、StringBuffer和StringBuilder的区别。
+#### 4、字符串字面量和new String()有什么区别。
+
+  - 字符串字面量：String str = “abc”;可能创建一个或者不创建对象，如果”abc”在字符串池中不存在，会在java字符串池中创建一个String对象（”abc”），然后str指向这个内存地址，无论以后用这种方式创建多少个值为”abc”的字符串对象，始终只有一个内存地址被分配。
+  - String str = new String(“abc”);至少会创建一个对象，也有可能创建两个。因为用到new关键字，肯定会在堆中创建一个String对象，如果字符池中已经存在”abc”,则不会在字符串池中创建一个String对象，如果不存在，则会在字符串常量池中也创建一个对象。
+ 
+  
+#### 5、	String、StringBuffer和StringBuilder的区别。
 
   String 是不可变的对象, 因此在每次对 String 类型进行改变的时候其实都等同于生成了一个新的 String 对象，然后将指针指向新的 String 对象，所以经常改变内容的字符串最好不要用 String ，因为每次生成对象都会对系统性能产生影响。
   
@@ -46,7 +52,7 @@ String S1 = S2 +S3 + S4;
 
   StringBuilder是Java5新增的一个StringBuffer的替代类，它不是线程安全的。
 
-#### 5、在静态方法中能不能调用非静态的成员变量。（能不能覆盖一个static的方法）
+#### 6、在静态方法中能不能调用非静态的成员变量。（能不能覆盖一个static的方法）
   
   static关键字：在JVM加载一个类的时候，若该类存在static修饰的成员变量和成员方法，则会为这些成员变量和成员方法在固定的位置开辟一个固定大小的内存区域，有了这些“固定”的特性，那么JVM就可以非常方便地访问他们。
   
@@ -54,7 +60,7 @@ String S1 = S2 +S3 + S4;
   
   简单来说static修饰的成员和方法属于类而不属于对象。
   
-#### 6、抽象类和接口的区别。
+#### 7、抽象类和接口的区别。
 1.语法层面上的区别
 
 　　1）抽象类可以提供成员方法的实现细节，而接口中只能存在public abstract 方法；
@@ -71,12 +77,12 @@ String S1 = S2 +S3 + S4;
 
 　　2）设计层面不同，抽象类作为很多子类的父类，它是一种模板式设计。而接口是一种行为规范，它是一种辐射式设计。什么是模板式设计？最简单例子，大家都用过ppt里面的模板，如果用模板A设计了ppt B和ppt C，ppt B和ppt C公共的部分就是模板A了，如果它们的公共部分需要改动，则只需要改动模板A就可以了，不需要重新对ppt B和ppt C进行改动。而辐射式设计，比如某个电梯都装了某种报警器，一旦要更新报警器，就必须全部更新。也就是说对于抽象类，如果需要添加新的方法，可以直接在抽象类中添加具体的实现，子类可以不进行变更；而对于接口则不行，如果接口进行了变更，则所有实现这个接口的类都必须进行相应的改动。
 
-#### 7、	equals方法的作用是什么，它和==有什么区别。
+#### 8、	equals方法的作用是什么，它和==有什么区别。
 
   - "=="：作用是判断两个对象的地址是不是相等，即两个对象是不是同一个对象（基本数据类型==比较的是值，引用数据类型==比较的是内存地址）。
   - equals：作用时判断两个对象是否相等。默认情况下，调用的是Object中的equals方法，等价于“==”，即比较两个对象的地址是否相等。通常情况下会覆盖equals方法。
   
-#### 8、	hashCode方法的作用是什么，它和equals方法有什么联系。
+#### 9、	hashCode方法的作用是什么，它和equals方法有什么联系。
 
   - hashCode()：作用是获取哈希码，也叫做散列码。将任意长度的数据映射成一个固定长度的值。
   
@@ -97,7 +103,7 @@ String S1 = S2 +S3 + S4;
 
 也许大多数人都会想到调用equals方法来逐个进行比较，这个方法确实可行。但是如果集合中已经存在一万条数据或者更多的数据，如果采用equals方法去逐一比较，效率必然是一个问题。此时hashCode方法的作用就体现出来了，当集合要添加新的对象时，先调用这个对象的hashCode方法，得到对应的hashcode值，实际上在HashMap的具体实现中会用一个table保存已经存进去的对象的hashcode值，如果table中没有该hashcode值，它就可以直接存进去，不用再进行任何比较了；如果存在该hashcode值， 就调用它的equals方法与新元素进行比较，相同的话就不存了，不相同就散列其它的地址，所以这里存在一个冲突解决的问题，这样一来实际调用equals方法的次数就大大降低了，说通俗一点：Java中的hashCode方法就是根据一定的规则将与对象相关的信息（比如对象的存储地址，对象的字段等）映射成一个数值，这个数值称作为散列值。
 
-#### 9、可以直接根据hashcode值判断两个对象是否相等吗?
+#### 10、可以直接根据hashcode值判断两个对象是否相等吗?
 
   肯定是不可以的，因为不同的对象可能会生成相同的hashcode值,即所谓的hash碰撞。虽然不能根据hashcode值判断两个对象是否相等，但是可以直接根据hashcode值判断两个对象不等，如果两个对象的hashcode值不等，则必定是两个不同的对象。如果要判断两个对象是否真正相等，必须通过equals方法。
 
@@ -108,13 +114,13 @@ String S1 = S2 +S3 + S4;
 
 在重写equals方法的同时，必须重写hashCode方法，因为默认情况下，hashCode方法是将对象的存储地址进行映射。
 
-#### 10、fianl关键字的作用。
+#### 11、fianl关键字的作用。
    
    - 对于一个final变量，如果是基本数据类型的变量，则其数值一旦在初始化之后便不能更改；如果是引用类型的变量，则在对其初始化之后便不能再让其指向另一个对象。
    - 当用final修饰一个类时，表明这个类不能被继承。final类中的所有成员方法都会被隐式地指定为final方法。
    - 使用final方法的原因有两个。第一个原因是把方法锁定，以防任何继承类修改它的含义；第二个原因是效率。在早期的Java实现版本中，会将final方法转为内嵌调用。但是如果方法过于庞大，可能看不到内嵌调用带来的任何性能提升（现在的Java版本已经不需要使用final方法进行这些优化了）。类中所有的private方法都隐式地指定为final。
 
-#### [11、什么是序列化，序列化前后对象有何区别。](https://www.ibm.com/developerworks/cn/java/j-lo-serial/index.html)
+#### [12、什么是序列化，序列化前后对象有何区别。](https://www.ibm.com/developerworks/cn/java/j-lo-serial/index.html)
 
 序列化：表示将一个对象转换成可存储或可传输的状态。序列化后的对象可以在网络上进行传输，也可以存储到本地。
 
@@ -125,14 +131,14 @@ String S1 = S2 +S3 + S4;
   - 在序列化过程中，虚拟机会试图调用对象类里的 writeObject 和 readObject 方法，进行用户自定义的序列化和反序列化，如果没有这样的方法，则默认调用是 ObjectOutputStream 的 defaultWriteObject 方法以及 ObjectInputStream 的 defaultReadObject 方法。用户自定义的 writeObject 和 readObject 方法可以允许用户控制序列化的过程，比如可以在序列化的过程中动态改变序列化的数值。基于这个原理，可以在实际应用中得到使用，用于敏感字段的加密工作。
   - Java 序列化机制为了节省磁盘空间，具有特定的存储规则，当写入文件的为同一对象时，并不会再将对象的内容进行存储，而只是再次存储一份引用。
 
-#### [12、序列化Serializable和Parcelable的区别。](https://blog.csdn.net/SilenceOO/article/details/73469237)
+#### [13、序列化Serializable和Parcelable的区别。](https://blog.csdn.net/SilenceOO/article/details/73469237)
   
   - Parcelable方式的实现原理是将一个完整的对象进行分解，而分解后的每一部分都是Intent所支持的数据类型，这样也就实现传递对象的功能了。
   - Parcelable的性能比Serializable好，因为后者在反射过程频繁GC，所以在内存间数据传输时推荐使用Parcelable，如activity间传输数据。
   - Serializable可将数据持久化方便保存，所以在需要保存或网络传输数据时选择Serializable，因为android不同版本Parcelable可能不同，所以不推荐使用Parcelable进行数据持久化。
   - Parcelable不能使用在要将数据存储在磁盘上的情况，因为Parcelable不能很好的保证数据的持续性在外界有变化的情况下。尽管Serializable效率低点，但此时还是建议使用Serializable 。
 
-#### [13、try catch finally，try里有return，finally还执行么。](http://www.cnblogs.com/lanxuezaipiao/p/3440471.html#top)
+#### [14、try catch finally，try里有return，finally还执行么。](http://www.cnblogs.com/lanxuezaipiao/p/3440471.html#top)
 总结：
  - try语句没有被执行到，如在try语句之前就返回了，这样finally语句就不会执行，这也说明了finally语句被执行的必要而非充分条件是：相应的try语句一定被执行到。
  - 在try块中有System.exit(0);这样的语句，System.exit(0);是终止Java虚拟机JVM的，连JVM都停止了，所有都结束了，当然finally语句也不会被执行到。
@@ -142,7 +148,7 @@ String S1 = S2 +S3 + S4;
 - try块里的return语句在异常的情况下不会被执行，这样具体返回哪个看情况。
 - 当发生异常后，catch中的return执行情况与未发生异常时try中return的执行情况完全一样。
 
-#### [14、Exception与Error类结构，Exception与Error的区别。(Java异常分类)](https://blog.csdn.net/hguisu/article/details/6155636)
+#### [15、Exception与Error类结构，Exception与Error的区别。(Java异常分类)](https://blog.csdn.net/hguisu/article/details/6155636)
 ![异常分类](https://github.com/chen-eugene/Interview/blob/master/image/1354020417_5176.jpg)
 
   - Error：是程序无法处理的错误，表示运行应用程序中较严重问题，如ava虚拟机运行错误（Virtual MachineError）、内存溢出（OutOfMemoryError）等，这些错误表示故障发生于虚拟机自身、或者发生在虚拟机试图执行应用时。 这些异常发生时，Java虚拟机（JVM）一般会选择线程终止。
