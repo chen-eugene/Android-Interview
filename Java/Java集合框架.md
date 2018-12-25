@@ -1,5 +1,7 @@
-#### 1、Java集合框架的结构。
-[集合框架结构](https://www.jianshu.com/p/63e76826e852)
+#### [1、Java集合框架的结构。](https://www.jianshu.com/p/63e76826e852)
+
+![Java集合框架](https://github.com/chen-eugene/Android-Interview/blob/master/image/2243690-9cd9c896e0d512ed.jpg)
+
 #### 2、ArrayList实现原理。
 [ArrayList工作原理](https://yikun.github.io/2015/04/04/Java-ArrayList%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/)     
 [ArrayList源码](https://blog.csdn.net/ns_code/article/details/35568011)
