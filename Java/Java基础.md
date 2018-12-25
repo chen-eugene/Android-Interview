@@ -27,9 +27,12 @@
   - JVM：当运行一个程序时，JVM 负责将字节码转换为特定机器代码。JVM 提供了内存管理/垃圾回收和安全机制等。这种独立于硬件和操作系统时的Java具有跨平台的特性。
   
 #### 4、	String、StringBuffer和StringBuilder的区别。
-String 是不可变的对象, 因此在每次对 String 类型进行改变的时候其实都等同于生成了一个新的 String 对象，然后将指针指向新的 String 对象，所以经常改变内容的字符串最好不要用 String ，因为每次生成对象都会对系统性能产生影响。
-StringBuffer、StringBuilder在每次修改的时候是对自身对象进行操作，而不是生成新的对象，再改变对象引用。
-在某些特别情况下， String 对象的字符串拼接其实是被 JVM 解释成了StringBuffer对象的拼接，所以这些时候 String 对象的速度并不会比StringBuffer对象慢，而特别是以下的字符串对象生成中。如：                                                                                                       
+
+  String 是不可变的对象, 因此在每次对 String 类型进行改变的时候其实都等同于生成了一个新的 String 对象，然后将指针指向新的 String 对象，所以经常改变内容的字符串最好不要用 String ，因为每次生成对象都会对系统性能产生影响。
+  
+  StringBuffer、StringBuilder在每次修改的时候是对自身对象进行操作，而不是生成新的对象，再改变对象引用。
+  
+  在某些特别情况下， String 对象的字符串拼接其实是被 JVM 解释成了StringBuffer对象的拼接，所以这些时候 String 对象的速度并不会比StringBuffer对象慢，而特别是以下的字符串对象生成中。如：                                                                                                       
 `String S1 = “This is only a” + “ simple” + “ test” `                                                                                   
 但是如果你的字符串是来自另外的 String 对象的话，速度就没那么快了，譬如：
 ``` 
@@ -39,9 +42,9 @@ String S4 = “ test”;
 String S1 = S2 +S3 + S4; 
 ```
 
-StringBuffer线程安全的可变字符序列。一个类似于 String 的字符串缓冲区，每个字符串缓冲区都有一定的容量。只要字符串缓冲区所包含的字符序列的长度没有超出此容量，就无需分配新的内部缓冲区数组。
+  StringBuffer线程安全的可变字符序列。一个类似于 String 的字符串缓冲区，每个字符串缓冲区都有一定的容量。只要字符串缓冲区所包含的字符序列的长度没有超出此容量，就无需分配新的内部缓冲区数组。
 
-StringBuilder是Java5新增的一个StringBuffer的替代类，它不是线程安全的。
+  StringBuilder是Java5新增的一个StringBuffer的替代类，它不是线程安全的。
 
 #### 5、在静态方法中能不能调用非静态的成员变量。（能不能覆盖一个static的方法）
   
