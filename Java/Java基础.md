@@ -151,10 +151,10 @@ String S1 = S2 +S3 + S4;
     - 运行时异常：都是RuntimeException类及其子类异常，如NullPointerException(空指针异常)、IndexOutOfBoundsException(下标越界异常)等，这些异常是不检查异常，程序中可以选择捕获处理，也可以不处理。 
     - 非运行时异常 （编译异常）：是RuntimeException以外的异常，如IOException、SQLException，类型上都属于Exception类及其子类，从程序语法角度讲是必须进行处理的异常，如果不处理，程序就不能编译通过。 
 
-  在以下4种特殊情况下，finally块不会被执行：
-    - 在finally语句块中发生了异常。
-    - 在前面的代码中用了System.exit()退出程序。
-    - 程序所在的线程死亡。
-    - 关闭CPU。  
+在以下4种特殊情况下，finally块不会被执行：
+  - 在finally语句块中发生了异常。
+  - 在前面的代码中用了System.exit()退出程序。
+  - 程序所在的线程死亡。
+  - 关闭CPU。  
 
 
