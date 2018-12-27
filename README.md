@@ -17,10 +17,12 @@
  - [ⅳ other](https://github.com/chen-eugene/Interview/blob/master/Android/other.md)
 
 ### 五、性能优化
- - [ⅰ 内存优化](https://github.com/chen-eugene/Interview/blob/master/Android/%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96.md)
- - [ⅱ 流程优化](https://github.com/chen-eugene/Interview/blob/master/Android/%E6%B5%81%E7%A8%8B%E4%BC%98%E5%8C%96.md)
- - [ⅲ View优化](https://github.com/chen-eugene/Interview/blob/master/Android/RecyclerView%E4%BC%98%E5%8C%96.md)
- - [ⅳ 其它](https://github.com/chen-eugene/Interview/blob/master/Android/%E5%85%B6%E5%AE%83.md)
+ - [ⅰ 启动流程优化](https://github.com/chen-eugene/Interview/blob/master/Android/%E6%B5%81%E7%A8%8B%E4%BC%98%E5%8C%96.md)
+ - [ⅱ UI流畅度优化](https://github.com/chen-eugene/Interview/blob/master/Android/RecyclerView%E4%BC%98%E5%8C%96.md)
+ - [ⅲ 内存优化](https://github.com/chen-eugene/Interview/blob/master/Android/%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96.md)
+ - [ⅳ Apk瘦身]()
+ - [ⅴ 电量优化]()
+ - [ⅶ 其它](https://github.com/chen-eugene/Interview/blob/master/Android/%E5%85%B6%E5%AE%83.md)
 
 ### [六、热门技术](https://github.com/chen-eugene/Interview/blob/master/Android/%E7%83%AD%E9%97%A8%E6%8A%80%E6%9C%AF.md)
 ### [七、常用框架](https://github.com/chen-eugene/Interview/blob/master/Android/%E5%B8%B8%E7%94%A8%E6%A1%86%E6%9E%B6.md)
