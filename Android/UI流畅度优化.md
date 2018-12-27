@@ -1,1 +1,109 @@
+#### 1、	如何解决卡顿问题。
+
+常见问题：
+  - 过度绘制，层级过深。
+  - 主线程耗时大的函数、滑动过程中的CPU工作问题。
+   
+    主线程里占用CUP时间很长的函数，特别关注IO操作（文件IO、网络IO、数据库操作等），
+    主线程调用次数多的函数
+
+工具：
+  - Profile GPU Rendering（Profile GPU Rendering）
+  - 设备过渡绘制查看功能、HierarchyViewer等
+  - Lint静态代码分析工具
+  - Traceview
+
+#### 2、	Android UI卡顿怎么进行监测。
+
+[卡顿监测原理](https://blog.csdn.net/lmj623565791/article/details/58626355)
+[BlockCanary原理](http://blog.zhaiyifan.cn/2016/01/16/BlockCanaryTransparentPerformanceMonitor/)
+
+1. 利用UI线程Looper打印的日志。
+  - UI线程中的Looper，在其loop方法中会不断取出Message，调用其绑定的Handler在UI线程进行执行。
+```
+public static void loop() {
+    final Looper me = myLooper();
+
+    final MessageQueue queue = me.mQueue;
+    // ...
+    for (;;) {
+        Message msg = queue.next(); // might block
+        // This must be in a local variable, in case a UI event sets the logger
+        Printer logging = me.mLogging;
+        if (logging != null) {
+            logging.println(">>>>> Dispatching to " + msg.target + " " +
+                    msg.callback + ": " + msg.what);
+        }
+        // focus
+        msg.target.dispatchMessage(msg);
+
+        if (logging != null) {
+            logging.println("<<<<< Finished to " + msg.target + " " + msg.callback);
+        }
+
+        // ...
+        }
+        msg.recycleUnchecked();
+    }
+}
+```
+如果设置了logging，会分别打印出>>>>> Dispatching to和<<<<< Finished to这样的log。
+```
+public class BlockDetectByPrinter {
+
+    public static void start() {
+
+        Looper.getMainLooper().setMessageLogging(new Printer() {
+
+            private long startTime;   
+	    private long blockThreshold;
+	    private long startedPrinting;
+
+            @Override
+            public void println(String x) {
+                if (!startedPrinting) {
+        		mStartTimeMillis = System.currentTimeMillis();
+       			startedPrinting = SystemClock.currentThreadTimeMillis();
+       			mStartedPrinting = true;
+   		 } else {
+        		final long endTime = System.currentTimeMillis();
+        		startedPrinting = false;
+			//判断是否为卡顿
+       			if (isBlock(endTime)) {
+			    StringBuilder sb = new StringBuilder();
+        		    StackTraceElement[] stackTrace = Looper.getMainLooper().getThread().getStackTrace();
+           			 for (StackTraceElement s : stackTrace) {
+              				sb.append(s.toString() + "\n");
+          			 }
+       			}
+    		}
+            }
+        });
+    }
+    
+    private boolean isBlock(long endTime) {
+   	 return endTime - startTime > blockThreshold;
+    }
+    
+}
+```
+可以通过 `Looper.getMainLooper().setMessageLogging(mainLooperPrinter);`
+并在mainLooperPrinter中判断start和end，来获取主线程dispatch该message的开始和结束时间，并判定该时间超过阈值(如2000毫秒)为主线程卡慢发生，并dump出各种信息。
+
+#### 3、	怎么实现页面渲染完成之后才加载数据，页面加载卡顿问题优化。
+
+#### 4、	ANR原理（回答主线程阻塞5秒不算，要分析源码）。
+
+[ANR原理分析](http://gityuan.com/2016/07/02/android-anr/)
+ANR(Application Not responding)，是指应用程序未响应，Android系统对于一些事件需要在一定的时间范围内完成，如果超过预定时间能未能得到有效响应或者响应时间过长，都会造成ANR。    
+
+ 造成ANR的场景：
+- Service Timeout:服务在20s内未执行完成；
+- BroadcastQueue Timeout：比如前台广播在10s内执行完成
+- ContentProvider Timeout：内容提供者执行超时
+- InputDispatching Timeout: 输入事件分发超时5s，包括按键分发事件的超时。
+
+#### 5、	Android启动冷白屏优化。
+
+#### 6、	如何处理App启动流程优化。
 
