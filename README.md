@@ -14,9 +14,9 @@
  - [ⅰ Binder](https://github.com/chen-eugene/Android-Interview/blob/master/Android/%E5%9B%9B.%E2%85%B0%E3%80%81Binder.md)
  - [ⅱ 资源管理框架](https://github.com/chen-eugene/Android-Interview/blob/master/Android/%E5%9B%9B.%E2%85%B1%E3%80%81%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86%E6%A1%86%E6%9E%B6.md)
  - [ⅲ Android系统启动流程]()
- - [ⅲ Android四大组件](https://github.com/chen-eugene/Android-Interview/blob/master/Android/%E5%9B%9B.%E2%85%B2%E3%80%81Android%E7%B3%BB%E7%BB%9F%E6%95%B4%E4%BD%93%E6%B5%81%E7%A8%8B.md)
- - [ⅳ Android图形界面]()
- - [ⅴ other](https://github.com/chen-eugene/Android-Interview/blob/master/Android/%E5%9B%9B.%E2%85%B3%E3%80%81other.md)
+ - [ⅳ Android四大组件](https://github.com/chen-eugene/Android-Interview/blob/master/Android/%E5%9B%9B.%E2%85%B2%E3%80%81Android%E7%B3%BB%E7%BB%9F%E6%95%B4%E4%BD%93%E6%B5%81%E7%A8%8B.md)
+ - [ⅴ Android图形界面]()
+ - [ⅵ other](https://github.com/chen-eugene/Android-Interview/blob/master/Android/%E5%9B%9B.%E2%85%B3%E3%80%81other.md)
 
 ### 五、性能优化
  - [ⅰ 渲染优化](https://github.com/chen-eugene/Android-Interview/blob/master/Android/%E4%BA%94.%E2%85%B0%E3%80%81%E6%B8%B2%E6%9F%93%E4%BC%98%E5%8C%96.md)
