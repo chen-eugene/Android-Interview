@@ -294,10 +294,19 @@ Java虚拟机在执行Java程序的过程中会把所管理的内存区域划分
 
   对于任意一个类，都需要由加载它的类加载器和这个类本身一同确立其在Java虚拟机中的唯一性。如果两个类来源于同一个Class文件，只要加载它们的类加载器不同，那么这两个类就必定不相等。
   
+   从Java虚拟机的角度有两种类加载器：
+   - 启动类加载器(Bootstrap ClassLoader)：使用C++语言实现，是Java虚拟机的一部分。
+   - 其他类加载器：独立于虚拟机之外，全部继承自java.lang.ClassLoader。
    
+   从Java开发人员的角度来看，绝大部分Java程序都会使用到一下3种系统提供的类加载器：
+   - 启动类加载器(Bootstrap ClassLoader)
+     这个类加载器负责将存放在\lib目录中的，或者被-Xbootclasspath参数所指定的路径中的，并且是虚拟机识别的（仅按照文件名识别，如rt.jar，名字不符合的类库即使放在lib目录中也不会被加载）类库加载到虚拟机内存中。
+   
+   - 扩展类加载器（Extension ClassLoader）
+     这个加载器由sun.misc.Launcher$ExtClassLoader实现，它负责加载\lib\ext目录中的，或者被java.ext.dirs系统变量所指定的路径中的所有类库，开发者可以直接使用扩展类加载器。
      
-   
-   
+   - 应用程序类加载器（Application ClassLoader）
+     这个类加载器由sun.misc.Launcher$AppClassLoader实现。由于这个类加载器是ClassLoader中的getSystemClassLoader()方法的返回值，所以一般也称它为系统类加载器。它负责加载用户类路径（ClassPath）上所指定的类库，开发者可以直接使用这个类加载器，如果应用程序中没有自定义过自己的类加载器，一般情况下这个就是程序中默认的类加载器。
 
 
 
