@@ -10,6 +10,7 @@
 ### [一、Android基础](https://github.com/chen-eugene/Android-Interview/blob/master/Android/%E4%B8%80%E3%80%81Android%E5%9F%BA%E7%A1%80.md)
 ### [二、四大组件相关](https://github.com/chen-eugene/Android-Interview/blob/master/Android/%E4%BA%8C%E3%80%81%E5%9B%9B%E5%A4%A7%E7%BB%84%E4%BB%B6%E7%9B%B8%E5%85%B3.md)
 ### [三、View剖析](https://github.com/chen-eugene/Android-Interview/blob/master/Android/%E4%B8%89%E3%80%81View%E5%89%96%E6%9E%90.md)
+
 ### 四、Framework
  - [ⅰ Binder](https://github.com/chen-eugene/Android-Interview/blob/master/Android/%E5%9B%9B.%E2%85%B0%E3%80%81Binder.md)
  - [ⅱ 资源管理框架](https://github.com/chen-eugene/Android-Interview/blob/master/Android/%E5%9B%9B.%E2%85%B1%E3%80%81%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86%E6%A1%86%E6%9E%B6.md)
@@ -23,13 +24,6 @@
  - [ⅱ 内存优化](https://github.com/chen-eugene/Android-Interview/blob/master/Android/%E4%BA%94.%E2%85%B1%E3%80%81%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96.md)
  - [ⅲ 电量优化](https://github.com/chen-eugene/Android-Interview/blob/master/Android/%E4%BA%94.%E2%85%B2%E3%80%81%E7%94%B5%E9%87%8F%E4%BC%98%E5%8C%96.md)
  - [ⅳ 其它](https://github.com/chen-eugene/Android-Interview/blob/master/Android/%E4%BA%94.%E2%85%B3%E3%80%81%E5%85%B6%E5%AE%83.md)
- 
- - [ⅰ App启动流程优化](https://github.com/chen-eugene/Android-Interview/blob/master/Android/App%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B%E4%BC%98%E5%8C%96.md)
- - [ⅱ UI流畅度优化](https://github.com/chen-eugene/Android-Interview/blob/master/Android/UI%E6%B5%81%E7%95%85%E5%BA%A6%E4%BC%98%E5%8C%96.md)
- - [ⅲ 内存优化](https://github.com/chen-eugene/Interview/blob/master/Android/%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96.md)
- - [ⅳ Apk瘦身](https://github.com/chen-eugene/Android-Interview/blob/master/Android/Apk%E7%98%A6%E8%BA%AB.md)
- - [ⅴ 电量优化](https://github.com/chen-eugene/Android-Interview/blob/master/Android/%E7%94%B5%E9%87%8F%E4%BC%98%E5%8C%96.md)
- - [ⅶ 其它](https://github.com/chen-eugene/Interview/blob/master/Android/%E5%85%B6%E5%AE%83.md)
 
 ### [六、常用技术](https://github.com/chen-eugene/Android-Interview/blob/master/Android/%E5%85%AD%E3%80%81%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF.md)
 ### [七、常用框架](https://github.com/chen-eugene/Android-Interview/blob/master/Android/%E4%B8%83%E3%80%81%E5%B8%B8%E7%94%A8%E6%A1%86%E6%9E%B6.md)
