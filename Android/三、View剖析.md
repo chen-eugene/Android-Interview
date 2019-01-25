@@ -209,7 +209,23 @@ view.measure(widthMeasureSpec, heightMeasureSpec);
 #### 18、滑动卡顿如何解决（不同原因及对应处理方式）。
 
 
-#### 19、Native和js交互流程。
+#### [19、Native和js交互流程。](https://blog.csdn.net/carson_ho/article/details/64904691)
+
+ - Native调用js：
+   - 通过WebView的loadUrl()
+     - JS代码调用一定要在 onPageFinished（） 回调之后才能调用，否则不会调用。
+     - 效率低，会使页面重新刷新，不能获取返回值
+   - 通过WebView的evaluateJavascript()
+     - 效率高，但只支持4.4以上版本
+   
+ - js调用Native：
+   - 通过WebView的addJavascriptInterface()进行对象映射
+     - [存在安全漏洞](https://www.jianshu.com/p/3a345d27cd42)
+   - 通过 WebViewClient 的shouldOverrideUrlLoading ()方法回调拦截 url
+     - 操作麻烦，不方便获取返回值。
+   - 通过 WebChromeClient 的onJsAlert()、onJsConfirm()、onJsPrompt()方法回调拦截JS对话框alert()、confirm()、prompt()消息
+     - 使用复杂
+  
 
 
 
