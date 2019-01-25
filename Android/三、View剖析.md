@@ -220,7 +220,7 @@ view.measure(widthMeasureSpec, heightMeasureSpec);
    
  - js调用Native：
    - 通过WebView的addJavascriptInterface()进行对象映射
-     - [存在安全漏洞](https://www.jianshu.com/p/3a345d27cd42)
+     - [在Android4.2以下，存在安全漏洞](https://www.jianshu.com/p/3a345d27cd42)
    - 通过 WebViewClient 的shouldOverrideUrlLoading ()方法回调拦截 url
      - 操作麻烦，不方便获取返回值。
    - 通过 WebChromeClient 的onJsAlert()、onJsConfirm()、onJsPrompt()方法回调拦截JS对话框alert()、confirm()、prompt()消息
