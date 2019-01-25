@@ -1,4 +1,4 @@
-#### 1、Touch事件的分发流程。
+#### [1、Touch事件的分发流程。](https://blog.csdn.net/carson_ho/article/details/54136311)
 
 [ViewGroup事件传递](https://blog.csdn.net/yanbober/article/details/45912661)  
 [View事件传递](https://blog.csdn.net/yanbober/article/details/45887547)
@@ -191,6 +191,26 @@ view.measure(widthMeasureSpec, heightMeasureSpec);
  - 使用runOnUiThread，更新UI主线程。
  
  - 通过view.post，更新UI主线程。
+ 
+ 
+ 
+#### 14、Selector是怎么实现的。
+
+
+#### 15、View动画是怎么实现的，为什么移动后点击事件还在原来的位置，属性动画的原理机制。
+
+
+#### 16、Android多点触控。
+
+
+#### 17、ViewPager、RecyclerView和SrcollView嵌套滑动冲突，显示不完整，滑动卡顿问题。
+
+
+#### 18、滑动卡顿如何解决（不同原因及对应处理方式）。
+
+
+#### 19、Native和js交互流程。
+
 
 
 
