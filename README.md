@@ -23,8 +23,8 @@
  - [ⅰ 渲染优化](https://github.com/chen-eugene/Android-Interview/blob/master/Android/%E4%BA%94.%E2%85%B0%E3%80%81%E6%B8%B2%E6%9F%93%E4%BC%98%E5%8C%96.md)
  - [ⅱ 内存优化](https://github.com/chen-eugene/Android-Interview/blob/master/Android/%E4%BA%94.%E2%85%B1%E3%80%81%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96.md)
  - [ⅲ 网络优化](https://github.com/chen-eugene/Android-Interview/blob/master/Android/%E4%BA%94.%E2%85%B2%E3%80%81%E7%BD%91%E7%BB%9C%E4%BC%98%E5%8C%96.md)
- - [ⅳ 电量优化](https://github.com/chen-eugene/Android-Interview/blob/master/Android/%E4%BA%94.%E2%85%B2%E3%80%81%E7%94%B5%E9%87%8F%E4%BC%98%E5%8C%96.md)
- - [ⅴ 其它](https://github.com/chen-eugene/Android-Interview/blob/master/Android/%E4%BA%94.%E2%85%B3%E3%80%81%E5%85%B6%E5%AE%83.md)
+ - [ⅳ 电量优化](https://github.com/chen-eugene/Android-Interview/blob/master/Android/%E4%BA%94.%E2%85%B3%E3%80%81%E7%94%B5%E9%87%8F%E4%BC%98%E5%8C%96.md)
+ - [ⅴ 其它](https://github.com/chen-eugene/Android-Interview/blob/master/Android/%E4%BA%94.%E2%85%B4%E3%80%81%E5%85%B6%E5%AE%83.md)
 
 ### [六、常用技术](https://github.com/chen-eugene/Android-Interview/blob/master/Android/%E5%85%AD%E3%80%81%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF.md)
 ### [七、常用框架](https://github.com/chen-eugene/Android-Interview/blob/master/Android/%E4%B8%83%E3%80%81%E5%B8%B8%E7%94%A8%E6%A1%86%E6%9E%B6.md)
