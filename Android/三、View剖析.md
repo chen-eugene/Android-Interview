@@ -112,6 +112,13 @@ view.measure(widthMeasureSpec, heightMeasureSpec);
 ```
   
   
+#### 7、在Activity的onCreate方法中能不能获取宽高，在onResume方法呢？ui绘制流程和Activity的生命周期有什么关系，ui开始绘制的时机到底是什么时候？
+
+ 在onCreate中获取View的宽高都是0，因为View还没有进行测量和绘制，在onResume方法中同样也无法获取到View的宽高。
+ 
+ 在Activity的attach方法中，会为Activity创建一个Window对象，在`Activity.handleResumeActivity`方法中才会去创建ViewRootImpl并添加视图，这个过程在`performResumeActivity`方法调用完成之后，所以在onResume中也不能获取到View的宽高，View还没有开始绘制。所以UI绘制的起点是在onResume方法调用完成之后。
+ 
+  
 #### 7、自定义View的流程，自定义View需要注意的问题，例如自定义View是否需要重写onLayout，onMeasure。
 
 **自定义View的流程：**
