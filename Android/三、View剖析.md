@@ -118,8 +118,18 @@ view.measure(widthMeasureSpec, heightMeasureSpec);
  
  在Activity的attach方法中，会为Activity创建一个Window对象，在`Activity.handleResumeActivity`方法中才会去创建ViewRootImpl并添加视图，这个过程在`performResumeActivity`方法调用完成之后，所以在onResume中也不能获取到View的宽高，View还没有开始绘制。所以UI绘制的起点是在onResume方法调用完成之后。
  
+ 
+#### 8、Android能够在子线程中更新UI吗？
+ 
   
-#### 7、自定义View的流程，自定义View需要注意的问题，例如自定义View是否需要重写onLayout，onMeasure。
+#### 9、invalidate、postInvalidate、requestLayout的区别。
+
+- invalidate：请求重绘View树（也就是draw方法），如果View大小没有发生变化就不会调用layout过程，并且指挥绘制哪些需要重绘的View，也就是哪个View（View只绘制该View，ViewGroup绘制整个ViewGroup）请求invalidate方法就绘制该View。
+- postInvalidate：invalidate方法只能在UI线程中请求，postInvalidate可以在非UI线程中调用。
+- requestLayout：requestLayout()方法会调用measure过程和layout过程，不会调用draw过程，也不会重新绘制任何View包括该调用者本身。
+  
+  
+#### 10、自定义View的流程，自定义View需要注意的问题，例如自定义View是否需要重写onLayout，onMeasure。
 
 **自定义View的流程：**
 
@@ -148,13 +158,7 @@ view.measure(widthMeasureSpec, heightMeasureSpec);
    当包含View的Activity退出或者当前View被remove时，View的onDetachedFromWindow方法会被调用，和此方法对应的是onAttachedToWindow，当View变得不可见时同样需要停止线程和动画，否则可能会造成内存泄漏。
    
    
-#### 8、invalidate、postInvalidate、requestLayout的区别。
-
-- invalidate：请求重绘View树（也就是draw方法），如果View大小没有发生变化就不会调用layout过程，并且指挥绘制哪些需要重绘的View，也就是哪个View（View只绘制该View，ViewGroup绘制整个ViewGroup）请求invalidate方法就绘制该View。
-- postInvalidate：invalidate方法只能在UI线程中请求，postInvalidate可以在非UI线程中调用。
-- requestLayout：requestLayout()方法会调用measure过程和layout过程，不会调用draw过程，也不会重新绘制任何View包括该调用者本身。
-
-#### 9、动画的原理，底层如何给上层信号。
+#### 11、动画的原理，底层如何给上层信号。
 
  - 补间动画：通过确定开始的视图样式和结束的视图样式，中间变化过程由系统补全。包括平移、缩放、旋转和透明度四种变换。**只能作用于View。**
 
@@ -163,17 +167,17 @@ view.measure(widthMeasureSpec, heightMeasureSpec);
  - 属性动画：在一定时间间隔内，通过不断对值进行改变和不断查找对象的set方法将值赋给该对象，从而实现该对象在该属性上的动画效果。**可以作用任意对象。**
  
 
-#### 10、插值器和估值器。
+#### 12、插值器和估值器。
 
  - 插值器：设置属性值从初始值过渡到结束值的变化规律，即确定了动画变化的趋势，如匀加速，匀减速等。
  
  - 估值器：设置属性值从初始值过渡到结束值的变化具体数值，即确定了动画变化的具体效果。如修改颜色，大小等。
  
  
-#### 11、[RecyclerView和ListView复用机制。](https://www.jianshu.com/p/9306b365da57)
+#### 13、[RecyclerView和ListView复用机制。](https://www.jianshu.com/p/9306b365da57)
 
 
-#### 12、处理滑动的几种方式，Scroller滑动的原理。
+#### 14、处理滑动的几种方式，Scroller滑动的原理。
 
  ![滑动冲突场景](https://github.com/chen-eugene/Interview/blob/master/image/1543826555.png)
  
@@ -189,7 +193,7 @@ view.measure(widthMeasureSpec, heightMeasureSpec);
  - 场景3：场景1和场景2的嵌套。
 
 
-#### 13、简述工作线程更新UI的方法。
+#### 15、简述工作线程更新UI的方法。
  
  - 通过handler.sendMessage，更新UI主线程。
  
@@ -201,22 +205,22 @@ view.measure(widthMeasureSpec, heightMeasureSpec);
  
  
  
-#### 14、Selector是怎么实现的。
+#### 16、Selector是怎么实现的。
 
 
-#### 15、View动画是怎么实现的，为什么移动后点击事件还在原来的位置，属性动画的原理机制。
+#### 17、View动画是怎么实现的，为什么移动后点击事件还在原来的位置，属性动画的原理机制。
 
 
-#### 16、Android多点触控。
+#### 18、Android多点触控。
 
 
-#### 17、ViewPager、RecyclerView和SrcollView嵌套滑动冲突，显示不完整，滑动卡顿问题。
+#### 19、ViewPager、RecyclerView和SrcollView嵌套滑动冲突，显示不完整，滑动卡顿问题。
 
 
-#### 18、滑动卡顿如何解决（不同原因及对应处理方式）。
+#### 20、滑动卡顿如何解决（不同原因及对应处理方式）。
 
 
-#### [19、Native和js交互流程。](https://blog.csdn.net/carson_ho/article/details/64904691)
+#### [21、Native和js交互流程。](https://blog.csdn.net/carson_ho/article/details/64904691)
 
  - Native调用js：
    - 通过WebView的loadUrl()
