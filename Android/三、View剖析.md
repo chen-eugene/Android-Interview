@@ -119,7 +119,20 @@ view.measure(widthMeasureSpec, heightMeasureSpec);
  在Activity的attach方法中，会为Activity创建一个Window对象，在`Activity.handleResumeActivity`方法中才会去创建ViewRootImpl并添加视图，这个过程在`performResumeActivity`方法调用完成之后，所以在onResume中也不能获取到View的宽高，View还没有开始绘制。所以UI绘制的起点是在onResume方法调用完成之后。
  
  
-#### 8、Android能够在子线程中更新UI吗？
+#### 8、Android能够在子线程中更新UI吗？为什么要设计成不能在子线程中更新UI？
+ 
+ `
+ void checkThread() {
+        if (mThread != Thread.currentThread()) {
+            throw new CalledFromWrongThreadException(
+                    "Only the original thread that created a view hierarchy can touch its views.");
+        }
+ }
+ `
+ 更新UI是监测是否为UI线程是由ViewRootImpl的checkThread方法来完成的，而ViewRootImpl的创建是在`ActivityThread.handleResumeActivity`方法中。所以在第一次onResume方法调用的时候或者之前的回调方法中，在子线程中更新UI是不会抛出异常的。
+ 
+ 
+ 这样设计的考虑：Android的UI操作并不是线程安全的，如果允许在子线程中更新UI的话，必然会导致界面混乱。想要避免这个问题就必须采用加锁来保证UI操作的线程安全，这势必会导致效率的下降。所以为了提高UI操作的效率和UI操作的线程安全，就禁止在子线程中更新UI。 
  
   
 #### 9、invalidate、postInvalidate、requestLayout的区别。
