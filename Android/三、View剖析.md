@@ -121,14 +121,14 @@ view.measure(widthMeasureSpec, heightMeasureSpec);
  
 #### 8、Android能够在子线程中更新UI吗？为什么要设计成不能在子线程中更新UI？
  
- `
+ ```
  void checkThread() {
         if (mThread != Thread.currentThread()) {
             throw new CalledFromWrongThreadException(
                     "Only the original thread that created a view hierarchy can touch its views.");
         }
  }
- `   
+ ```
  
  更新UI是监测是否为UI线程是由ViewRootImpl的checkThread方法来完成的，而ViewRootImpl的创建是在`ActivityThread.handleResumeActivity`方法中。所以在第一次onResume方法调用的时候或者之前的回调方法中，在子线程中更新UI是不会抛出异常的。
  
