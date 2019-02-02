@@ -201,6 +201,27 @@ view.measure(widthMeasureSpec, heightMeasureSpec);
  
 #### 14、[RecyclerView和ListView复用机制。](https://www.jianshu.com/p/9306b365da57)
 
+ Recycler是RecyclerView的内部类，是整个复用机制的核心，专门向外提供复用机制的api。Recycler的几个属性变量十分重要。
+ - mCachedViews：默认大小为2，可以理解为一级缓存，只有跟中条件都匹配成功(postion是否一致，type是否相同，ViewHolder是否被remove掉)，就可以直接进行复用，无需绑定数据。
+ 
+ - RecyclerViewPool：是RecyclerView的内部类，二级缓存，会根据不同的item type来创建不同的List，每个List的默认大小为5。只要type值匹配成功，那么就可以复用，需要调用onBindViewHolder方法，绑定数据。
+ 
+ 复用机制：
+ 
+ - 滑动过程中的回收和复用都会优先从mCacheViews集合中查找，只有原来的卡位可以重新复用这个 ViewHolder，新位置的卡位无法从 mCachedViews 里拿 ViewHolder出来用。
+ 
+   怎么理解呢：当滑动RecyclerView使一二个位置上的item移出屏幕，那么会被优先缓存到这个集合中，当再次滑动使得一二位置上的item移入屏幕，那么见直接从mCacheViews中查找，如找到直接复用，不需要重新填充数据。
+ 
+ - 如果mCachedViews中没有找到可以复用的ViewHolder，那么将在ViewPool中查找。不同于mCacheViews的查找规则那么严格(postion是否一致，type是否相同，ViewHolder是否被remove掉)，ViewPool中只要存在匹配上type，那么就可以复用，并且会重新调用onBindViewHolder绑定数据。
+   
+ - 如果以上都没有找到可以复用的ViewHodler，那么就会调用onCreateViewHolder创建新的ViewHolder。
+ 
+ 回收机制：
+ 
+ - 首先会将回收的ViewHolder放入mCacheViews中，如果mCacheView已经满了，那么就会将mCacheViews中第0个位置上的ViewHolder放到ViewPool中去，第1的位置向前移动，然后在放入最新的ViewHolder。
+ 
+ - 回收完成之后会回调onRecycled方法。
+
 
 #### 15、处理滑动的几种方式，Scroller滑动的原理。
 
