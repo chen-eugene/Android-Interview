@@ -28,6 +28,11 @@ Touch事件的分发过程有三个重要的方法来完成：dispatchTouchEvent
   子视图调用`getParent().requestDisallowInterceptTouchEvent(true)`方法，将会阻止父视图拦截touch事件，此touch事件的后续action也不会被拦截。
  
   
+#### [3、具体问题如下图所示](https://www.jianshu.com/p/94307344eed4)
+
+ ![]()
+ 
+  
 #### 3、View的位置参数有哪些，left、x、translationX的含义以及三者的关系。
 - view的位置由left、top、right、bottom四个属性决定，这几个坐标可以通过getLeft()、getTop()、getRight()、getBottom()获取。注意这四个坐标是相对坐标，即相对于父容器的坐标。当view发生移动时，这几个坐标是不变的。
 
