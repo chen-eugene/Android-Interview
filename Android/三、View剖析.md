@@ -192,7 +192,7 @@ view.measure(widthMeasureSpec, heightMeasureSpec);
  - 属性动画：在一定时间间隔内，通过不断对值进行改变和不断查找对象的set方法将值赋给该对象，从而实现该对象在该属性上的动画效果。**可以作用任意对象。**
  
 
-#### 13、插值器和估值器。
+#### [13、插值器和估值器。](https://blog.csdn.net/carson_ho/article/details/72863901)
 
  - 插值器：设置属性值从初始值过渡到结束值的变化规律，即确定了动画变化的趋势，如匀加速，匀减速等。
  
@@ -255,6 +255,8 @@ view.measure(widthMeasureSpec, heightMeasureSpec);
 
 
 #### 18、View动画是怎么实现的，为什么移动后点击事件还在原来的位置，属性动画的原理机制。
+
+ 
 
 
 #### 19、Android多点触控。
