@@ -30,10 +30,16 @@ Touch事件的分发过程有三个重要的方法来完成：dispatchTouchEvent
   
 #### [3、具体问题如下图所示](https://www.jianshu.com/p/94307344eed4)
 
- ![]()
+ ![第三题](https://github.com/chen-eugene/Android-Interview/blob/master/image/wqiruy.png)
  
+ 不只是重写onTouchEvent方法，重写onDispatchTouchEvent方法是一样的道理。返回true表示消耗事件，剩下所有的事件会传递到这里，由它处理。返回false表示不消耗事件，正常传递，并最终向上交还给父视图。
+ 
+ 先总结三种情况：
+ - 默认情况，不重写任何方法，即没有谁消耗掉事件。这种情况所有的事件传递到最上层的视图将会将还给父视图。
+ - ViewGroup的onTouchEvent方法不消耗，view的onTouchEvent方法消耗掉事件。
+   这种情况所有事件将会交给view来处理，ViewGroup的onTouchEvent方法将不会被执行。
   
-#### 3、View的位置参数有哪些，left、x、translationX的含义以及三者的关系。
+#### 4、View的位置参数有哪些，left、x、translationX的含义以及三者的关系。
 - view的位置由left、top、right、bottom四个属性决定，这几个坐标可以通过getLeft()、getTop()、getRight()、getBottom()获取。注意这四个坐标是相对坐标，即相对于父容器的坐标。当view发生移动时，这几个坐标是不变的。
 
 - 从Android 3.0开始，增加了几个参数：x、y、translationX、translationY，都是相对于父容器的坐标。
@@ -49,7 +55,7 @@ Touch事件的分发过程有三个重要的方法来完成：dispatchTouchEvent
 ![坐标图](https://github.com/chen-eugene/Interview/blob/master/image/20160808154319878.png)
   
   
-#### 4、什么是MeasureSpec。
+#### 5、什么是MeasureSpec。
 MeasureSpec是一个32位的int值，高2位表示SpecMode，指测量模式；低30位表示SpecSize，指在某种测量模式下的规格大小。MeasureSpec一旦确定后，onMeasure方法就可以确定View的测量宽/高。
 
 - 对于DecorView，其MeasureSpec由窗口的尺寸和其资深的LayoutParams来共同决定。
@@ -58,7 +64,7 @@ MeasureSpec是一个32位的int值，高2位表示SpecMode，指测量模式；�
 ![MeasureSpec](https://github.com/chen-eugene/Interview/blob/master/image/20170311114110621.jpg)
   
   
-#### 5、View绘制过程。
+#### 6、View绘制过程。
 ViewRoot对应于ViewRootImpl类，是链接WindowManager和DocorView的纽带，View的三大流程均是通过ViewRoot来完成的。在ActivityThread中，当Activity对象被创建完毕后，会将DecorView添加到Window中，同时会创建ViewRootImpl对象，并将ViewRootImpl对象和DecorView建立关联。
 
 View的绘制流程就是从ViewRoot的performTraversals方法开始的，经过measure、layout和draw三个过程之后最终将View绘制出来。
@@ -81,7 +87,7 @@ View的绘制流程就是从ViewRoot的performTraversals方法开始的，经过
 - 绘制装饰（如前景，scrollbar等）。
   
   
-#### 6、怎么获取View的宽高。
+#### 7、怎么获取View的宽高。
 **getMeasuredWidth和getWidth的区别：**      
 
  - getMeasuredWidth返回的是View的测量宽/高，但某些情况下（如ListView）系统可能需要多次测量才能确定最终的测量宽/高，此时在onMeasure方法中拿不到准确的测量宽度。
@@ -117,14 +123,14 @@ view.measure(widthMeasureSpec, heightMeasureSpec);
 ```
   
   
-#### 7、在Activity的onCreate方法中能不能获取宽高，在onResume方法呢？ui绘制流程和Activity的生命周期有什么关系，ui开始绘制的时机到底是什么时候？
+#### 8、在Activity的onCreate方法中能不能获取宽高，在onResume方法呢？ui绘制流程和Activity的生命周期有什么关系，ui开始绘制的时机到底是什么时候？
 
  在onCreate中获取View的宽高都是0，因为View还没有进行测量和绘制，在onResume方法中同样也无法获取到View的宽高。
  
  在Activity的attach方法中，会为Activity创建一个Window对象，在`Activity.handleResumeActivity`方法中才会去创建ViewRootImpl并添加视图，这个过程在`performResumeActivity`方法调用完成之后，所以在onResume中也不能获取到View的宽高，View还没有开始绘制。所以UI绘制的起点是在onResume方法调用完成之后。
  
  
-#### 8、Android能够在子线程中更新UI吗？为什么要设计成不能在子线程中更新UI？
+#### 9、Android能够在子线程中更新UI吗？为什么要设计成不能在子线程中更新UI？
  
  ```
  void checkThread() {
@@ -141,14 +147,14 @@ view.measure(widthMeasureSpec, heightMeasureSpec);
  这样设计的考虑：Android的UI操作并不是线程安全的，如果允许在子线程中更新UI的话，必然会导致界面混乱。想要避免这个问题就必须采用加锁来保证UI操作的线程安全，这势必会导致效率的下降。所以为了提高UI操作的效率和UI操作的线程安全，就禁止在子线程中更新UI。 
  
   
-#### 9、invalidate、postInvalidate、requestLayout的区别。
+#### 10、invalidate、postInvalidate、requestLayout的区别。
 
 - invalidate：请求重绘View树（也就是draw方法），如果View大小没有发生变化就不会调用layout过程，并且指挥绘制哪些需要重绘的View，也就是哪个View（View只绘制该View，ViewGroup绘制整个ViewGroup）请求invalidate方法就绘制该View。
 - postInvalidate：invalidate方法只能在UI线程中请求，postInvalidate可以在非UI线程中调用。
 - requestLayout：requestLayout()方法会调用measure过程和layout过程，不会调用draw过程，也不会重新绘制任何View包括该调用者本身。
   
   
-#### 10、自定义View的流程，自定义View需要注意的问题，例如自定义View是否需要重写onLayout，onMeasure。
+#### 11、自定义View的流程，自定义View需要注意的问题，例如自定义View是否需要重写onLayout，onMeasure。
 
 **自定义View的流程：**
 
@@ -177,7 +183,7 @@ view.measure(widthMeasureSpec, heightMeasureSpec);
    当包含View的Activity退出或者当前View被remove时，View的onDetachedFromWindow方法会被调用，和此方法对应的是onAttachedToWindow，当View变得不可见时同样需要停止线程和动画，否则可能会造成内存泄漏。
    
    
-#### 11、动画的原理，底层如何给上层信号。
+#### 12、动画的原理，底层如何给上层信号。
 
  - 补间动画：通过确定开始的视图样式和结束的视图样式，中间变化过程由系统补全。包括平移、缩放、旋转和透明度四种变换。**只能作用于View。**
 
@@ -186,17 +192,17 @@ view.measure(widthMeasureSpec, heightMeasureSpec);
  - 属性动画：在一定时间间隔内，通过不断对值进行改变和不断查找对象的set方法将值赋给该对象，从而实现该对象在该属性上的动画效果。**可以作用任意对象。**
  
 
-#### 12、插值器和估值器。
+#### 13、插值器和估值器。
 
  - 插值器：设置属性值从初始值过渡到结束值的变化规律，即确定了动画变化的趋势，如匀加速，匀减速等。
  
  - 估值器：设置属性值从初始值过渡到结束值的变化具体数值，即确定了动画变化的具体效果。如修改颜色，大小等。
  
  
-#### 13、[RecyclerView和ListView复用机制。](https://www.jianshu.com/p/9306b365da57)
+#### 14、[RecyclerView和ListView复用机制。](https://www.jianshu.com/p/9306b365da57)
 
 
-#### 14、处理滑动的几种方式，Scroller滑动的原理。
+#### 15、处理滑动的几种方式，Scroller滑动的原理。
 
  ![滑动冲突场景](https://github.com/chen-eugene/Interview/blob/master/image/1543826555.png)
  
@@ -212,7 +218,7 @@ view.measure(widthMeasureSpec, heightMeasureSpec);
  - 场景3：场景1和场景2的嵌套。
 
 
-#### 15、简述工作线程更新UI的方法。
+#### 16、简述工作线程更新UI的方法。
  
  - 通过handler.sendMessage，更新UI主线程。
  
@@ -224,22 +230,22 @@ view.measure(widthMeasureSpec, heightMeasureSpec);
  
  
  
-#### 16、Selector是怎么实现的。
+#### 17、Selector是怎么实现的。
 
 
-#### 17、View动画是怎么实现的，为什么移动后点击事件还在原来的位置，属性动画的原理机制。
+#### 18、View动画是怎么实现的，为什么移动后点击事件还在原来的位置，属性动画的原理机制。
 
 
-#### 18、Android多点触控。
+#### 19、Android多点触控。
 
 
-#### 19、ViewPager、RecyclerView和SrcollView嵌套滑动冲突，显示不完整，滑动卡顿问题。
+#### 20、ViewPager、RecyclerView和SrcollView嵌套滑动冲突，显示不完整，滑动卡顿问题。
 
 
-#### 20、滑动卡顿如何解决（不同原因及对应处理方式）。
+#### 21、滑动卡顿如何解决（不同原因及对应处理方式）。
 
 
-#### [21、Native和js交互流程。](https://blog.csdn.net/carson_ho/article/details/64904691)
+#### [22、Native和js交互流程。](https://blog.csdn.net/carson_ho/article/details/64904691)
 
  - Native调用js：
    - 通过WebView的loadUrl()
