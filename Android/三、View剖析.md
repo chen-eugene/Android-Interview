@@ -22,7 +22,7 @@ Touch事件的分发过程有三个重要的方法来完成：dispatchTouchEvent
 - dispatchTouchEvent回true就是消费事件，这种说法不完全正确。dispatchTouchEvent事件派发是传递的，如果返回值为false将停止下次事件派发，如果返回true将继续下次派发。
  
  
-#### 2、点击事件被拦截，但是想传到下面的view，如何操作。
+#### [2、点击事件被拦截，但是想传到下面的view，如何操作。](https://blog.csdn.net/xw13782513621/article/details/77528518)
  
   如果`onInterceptTouchEvent`返回true，那么本次touch事件之后的所有action都不会在向下传递，将会交给此View的`onTouchEvent`方法处理。
   子视图调用`getParent().requestDisallowInterceptTouchEvent(true)`方法，将会阻止父视图拦截touch事件，此touch事件的后续action也不会被拦截。
