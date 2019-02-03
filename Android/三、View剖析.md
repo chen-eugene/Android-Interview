@@ -254,10 +254,58 @@ view.measure(widthMeasureSpec, heightMeasureSpec);
 #### 17、Selector是怎么实现的。
 
 
-#### 18、View动画是怎么实现的，为什么移动后点击事件还在原来的位置，属性动画的原理机制。
+#### [18、View动画是怎么实现的，为什么移动后点击事件还在原来的位置，属性动画的原理机制。](https://www.jianshu.com/p/3530ba1e9885)
 
+  **补间动画：**
+  ```
+  View通过调用startAnimation()方法设置补间动画。
+  public void startAnimation(Animation animation) {
+        animation.setStartTime(Animation.START_ON_FIRST_FRAME);
+        setAnimation(animation);
+        invalidateParentCaches();
+        invalidate(true);
+  }
+  ```
+  由此可见补间动画是通过调用invalidate()方法来进行重绘，只会触发onDraw方法，不会调用onMeasure和onLayout方法，也就是说虽然View的原本位置是没有改变的。
+  
+  **属性动画：**
+  属性动画设置完成之后调用start开始执行动画，最终会执行到ValueAnimator的shceduleAnimation方法
+  ```
+        private void scheduleAnimation() {
+            if (!mAnimationScheduled) {
+                mChoreographer.postCallback(Choreographer.CALLBACK_ANIMATION, mAnimate, null);
+                mAnimationScheduled = true;
+            }
+        }
+  ```
+  由此可见属性动画通过Choregrapher分发VSnyc信号来更新的，这个过程如果检测到View的属性值发生变化，那么将会重新执行View的onMeasure、onLayout和onDraw这个过程。
+  ```
+  final Runnable mAnimate = new Runnable() {
+            @Override
+            public void run() {
+                mAnimationScheduled = false;
+                doAnimationFrame(mChoreographer.getFrameTime());
+            }
+        };
+  
+  void initAnimation() {
+        if (!mInitialized) {
+            // mValueType may change due to setter/getter setup; do this before calling super.init(),
+            // which uses mValueType to set up the default type evaluator.
+            final Object target = getTarget();
+            if (target != null) {
+                final int numValues = mValues.length;
+                for (int i = 0; i < numValues; ++i) {
+                    mValues[i].setupSetterAndGetter(target);//会通过反射去查找target的Setter和Getter方法，并存储在HashMap中
+                }
+            }
+            super.initAnimation();
+        }
+  }
+  ```
+ 在这个过程中会执行到initAnimation()方法，ObjectAnimator重写了此方法，并调用setupSetterAndGetter查找Setter和Getter方法并存储在HashMap中，然后会在ValueAnimator的animationFrame方法中对target属性进行赋值。
  
-
+ 所以说补间动画不会修改View的实际位置，只会修改View的显示位置，而属性动画将会对View进行重新测量、布局和绘制，会修改View的实际位置。
 
 #### 19、Android多点触控。
 
