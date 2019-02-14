@@ -263,6 +263,7 @@ public class Test {
     在使用notify/notifyAll()方法进行通知时，被通知的线程是由 JVM 选择的，用ReentrantLock类结合Condition实例可以实现“选择性通知” ，这个功能非常重要，而且是Condition接口默认提供的。
     
     而synchronized关键字就相当于整个Lock对象中只有一个Condition实例，所有的线程都注册在它一个身上。如果执行notifyAll()方法的话就会通知所有处于等待状态的线程这样会造成很大的效率问题，而Condition实例的signalAll()方法 只会唤醒注册在该Condition实例中的所有等待线程。
+    Codition.await方法将会释放掉锁。
     
     
 #### [17、什么是线程死锁，线程死锁的四个条件。](https://www.ibm.com/developerworks/cn/java/j-lo-deadlock/index.html)
