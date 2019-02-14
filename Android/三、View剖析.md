@@ -6,7 +6,8 @@
 Touch事件的分发过程有三个重要的方法来完成：dispatchTouchEvent、onInterceptTouchEvent、onTouchEvent。 
 
 **分发流程：**
-- 对于跟ViewGroup来说，Touch事件产生后首先回传递给它的dispatchTouchEvent方法，如果这个ViewGroup的onInterceptTouchEvent方法返回true就表示它要拦截当前事件，它的onTouchEvent会被调用去处理此事件；如果这个ViewGroup的onInterceptTouchEvent方法返回false就表示它不拦截当前事件，此时事件就会传递给它的子视图，子视图的dispatchTouchEvent方法会被调用，如此反复直到事件被最终处理。
+- Android事件派发是先传递到最顶级的ViewGroup，再由ViewGroup递归传递到View的。
+- 在ViewGroup中可以通过onInterceptTouchEvent方法对事件传递进行拦截，onInterceptTouchEvent方法返回true不在向下继续传递它的onTouchEvent会被调用去处理此事件；如果这个ViewGroup的onInterceptTouchEvent方法返回false就表示它不拦截当前事件，此将会递归传递给子视图。
 
 -  当一个View需要处理事件时，如果它设置了OnTouchListener，那么OnTouchListener中的onTouch方法会被调用，如果onTouch返回false，则当前View的onTouchEvent方法会被调用；如果返回true，则onTouchEvent将不会被调用，表示当前View消耗掉了此事件。
 
@@ -14,6 +15,8 @@ Touch事件的分发过程有三个重要的方法来完成：dispatchTouchEvent
 
 **注意点：**
 - View没有onInterceptTouchEvent方法，一点有事件传递给它，那么它的onTouchEvent方法将会被调用。
+
+- 如果DOWN事件没有被消耗，那么后续的事件将不会继续下发。
 
 - 某个View一旦开始处理事件，如果它不消耗ACTION_DOWN事件(onTouchEvent返回false)，那么它将不会接收到同一个事件序列的后续事件，并且事件将会重新交给他的父视图处理，即父视图的onTouchEvent方法会被调用。
 
