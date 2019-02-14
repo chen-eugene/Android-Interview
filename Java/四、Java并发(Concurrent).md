@@ -374,7 +374,7 @@ y = -1;       //语句5
  
 #### 22、Java默认提供了几种线程池。
 
-- 核心线程数量(corePoolSize)：默认情况下，在创建了线程池后，线程池中的线程数为0，当有任务来之后，就会创建一个线程去执行任务，除非调用了prestartAllCoreThreads()或者prestartCoreThread()方法，当线程池中的线程数目达到corePoolSize后，就会把到达的任务放到缓存队列当。
+- 核心线程数量(corePoolSize)：默认情况下，在创建了线程池后，线程池中的线程数为0，当有任务来之后，就会创建一个线程去执行任务，除非调用了prestartAllCoreThreads()或者prestartCoreThread()方法，当线程池中的线程数目达到corePoolSize后，就会把到达的任务放到缓存队列当。当任务队列满了并且线程数小于maximumPoolSize，那么会创建新的线程来执行任务。
 - 最大线程数(maximumPoolSize)：表示在线程池中最多能创建多少个线程。
 - 空闲线程存活时间(keepAliveTime)：表示线程没有任务执行时最多保持多久时间会终止。
   
