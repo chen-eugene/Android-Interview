@@ -37,10 +37,12 @@ Touch事件的分发过程有三个重要的方法来完成：dispatchTouchEvent
  
  不只是重写onTouchEvent方法，重写onDispatchTouchEvent方法是一样的道理。返回true表示消耗事件，剩下所有的事件会传递到这里，由它处理。返回false表示不消耗事件，正常传递，并最终向上交还给父视图。
  
- 先总结三种情况：
- - 默认情况，不重写任何方法，即没有谁消耗掉事件。这种情况所有的事件传递到最上层的视图将会将还给父视图。
- - ViewGroup的onTouchEvent方法不消耗，view的onTouchEvent方法消耗掉事件。
-   这种情况所有事件将会交给view来处理，ViewGroup的onTouchEvent方法将不会被执行。
+ 问题分析：
+ - C的onTouchEvent方法返回true，那么它消耗了DOWN事件，其父视图将会继续分发后续的事件。
+ - B拦截MOVE事件，那么MOVE和后续事件将会最终传递到B，不会再继续向下分发。
+ - 所以C只能接收到DOWN事件，B能够接收到整个事件序列。
+ 
+ 
   
 #### 4、View的位置参数有哪些，left、x、translationX的含义以及三者的关系。
 - view的位置由left、top、right、bottom四个属性决定，这几个坐标可以通过getLeft()、getTop()、getRight()、getBottom()获取。注意这四个坐标是相对坐标，即相对于父容器的坐标。当view发生移动时，这几个坐标是不变的。
