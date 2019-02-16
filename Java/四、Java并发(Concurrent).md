@@ -347,7 +347,7 @@ public class Test {
 
   **AQS：以ReentranLock实现非公平锁来看AQS。**
   
-  AQS 全称 AbstractQueuedSynchronizer。是Java提供的一条基于等待队列的同步机制。AQS 中有两个重要的成员：
+  AQS 全称 AbstractQueuedSynchronizer。是Java提供的一套基于等待队列实现锁的框架。AQS 中有两个重要的成员：
   - 成员变量 state：state 为0表示没有任何线程持有这个锁，线程持有该锁后将 state 加1，释放时减1。多次持有释放则多次加减。实现可重入锁。
   - 还有一个双向链表，链表除了头结点外，每一个节点都记录了线程的信息，代表一个等待线程。这是一个 FIFO 的链表。
   
@@ -374,7 +374,7 @@ public class Test {
   公平锁的实现：在获取锁的时候，先判断等待队列中是否有等待线程，如果有则直接加入到等待队列中，这样就保证了先等待的线程先获取到锁。 
 
 
-#### [20、Java中volatile变量是什么。](https://www.cnblogs.com/dolphin0520/p/3920373.html)
+#### [21、Java中volatile变量是什么。](https://www.cnblogs.com/dolphin0520/p/3920373.html)
 - 原子性：即一个操作或者多个操作 要么全部执行并且执行的过程不会被任何因素打断，要么就都不执行。
 - 可见性：是指当多个线程访问同一个变量时，一个线程修改了这个变量的值，其他线程能够立即看得到修改的值。
 - 有序性：即程序执行的顺序按照代码的先后顺序执行。
@@ -414,7 +414,7 @@ y = -1;       //语句5
 - 该变量没有包含在具有其他变量的不变式中
 
 
-#### 21、为什么要使用线程池。
+#### 22、为什么要使用线程池。
 
   线程池提供了一种限制和资源的原理（包括执行一个任务），每个线程池还维护一些基本统计信息，例如已完成任务的数量。
   
@@ -424,7 +424,7 @@ y = -1;       //语句5
    - 提高线程的客观理性：线程是稀缺资源，如果无限制的创建，不仅会消耗系统资源，还会降低系统的稳定性，使用线程池可以进行统一的分配，调优和监控。
   
  
-#### 22、Java默认提供了几种线程池。
+#### 23、Java默认提供了几种线程池。
 
 - 核心线程数量(corePoolSize)：默认情况下，在创建了线程池后，线程池中的线程数为0，当有任务来之后，就会创建一个线程去执行任务，除非调用了prestartAllCoreThreads()或者prestartCoreThread()方法，当线程池中的线程数目达到corePoolSize后，就会把到达的任务放到缓存队列当。当任务队列满了并且线程数小于maximumPoolSize，那么会创建新的线程来执行任务。
 - 最大线程数(maximumPoolSize)：表示在线程池中最多能创建多少个线程。
@@ -454,7 +454,7 @@ y = -1;       //语句5
   ![线程池结构图](https://github.com/chen-eugene/Interview/blob/master/image/20170406230435886.jpg)
   
   
-  #### [23、什么时阻塞队列。](https://www.cnblogs.com/dolphin0520/p/3932906.html)
+  #### [24、什么时阻塞队列。](https://www.cnblogs.com/dolphin0520/p/3932906.html)
   
     当一个线程去获取一个阻塞队列的元素时，若队列为空，那么就会当前队列就会被阻塞，当队列有了元素之后，被阻塞的线程会被自动唤醒。
     
@@ -468,7 +468,7 @@ y = -1;       //语句5
     - DelayedWorkQueue：基于PriorityQueue，一种延时阻塞队列，DelayQueue中的元素只有当其指定的延迟时间到了，才能够从队列中获取到该元素。DelayQueue也是一个无界队列，因此往队列中插入数据的操作（生产者）永远不会被阻塞，而只有获取数据的操作（消费者）才会被阻塞。
       
   
- #### [24、如果提交任务时，线程池队列已满，会发生什么。](https://blog.csdn.net/qq_25806863/article/details/71172823)
+ #### [25、如果提交任务时，线程池队列已满，会发生什么。](https://blog.csdn.net/qq_25806863/article/details/71172823)
   
  当线程池的任务缓存队列已满并且线程池中的线程数目达到maximumPoolSize，如果还有任务到来就会采取任务拒绝策略，通常有以下四种策略：
    - ThreadPoolExecutor.AbortPolicy：拒绝执行新的任务，直接抛出RejectedExecutionException异常。（默认的拒绝策略）
@@ -476,7 +476,7 @@ y = -1;       //语句5
    - ThreadPoolExecutor.DiscardOldestPolicy：丢弃队列最前面的任务，然后重新尝试执行任务（重复此过程）。
    - ThreadPoolExecutor.CallerRunsPolicy：会调用当前线程池所在的线程去执行被拒绝的任务。
 
-#### [25、实现Runnable接口和Callable接口的区别。](https://www.cnblogs.com/dolphin0520/p/3949310.html)
+#### [26、实现Runnable接口和Callable接口的区别。](https://www.cnblogs.com/dolphin0520/p/3949310.html)
 
   Runnable和Callable都表示线程池要执行的任务，两者的区别在于Runnable不会返回线程的执行结果，而Callable可以返回线程的结果。执行结果使用Futrue来接收。
   ```
@@ -494,13 +494,13 @@ y = -1;       //语句5
   - get()方法用来获取执行结果，这个方法会产生阻塞，会一直等到任务执行完毕才返回；
   - get(long timeout, TimeUnit unit)用来获取执行结果，如果在指定时间内，还没获取到结果，就直接返回null。
   
-#### 26、执行execute()方法和submit()方法的区别是什么呢？
+#### 27、执行execute()方法和submit()方法的区别是什么呢？
     
   - execute()方法用于提交不需要返回值的任务，所以无法判断任务是否被线程池执行情况。
   - submit()方法用于提交有返回值的任务，线程池返回一个Future对象，通过这个Future对象可以判断任务的执行情况。
   
   
-#### 27、线程池需要销毁吗，如何进行销毁。
+#### 28、线程池需要销毁吗，如何进行销毁。
 
   线程池创建之后通常情况下是不需要销毁的，因为无法判断程序的执行过程中还有没有任务需要执行，这个并不是绝对的，需要根据具体的执行任务来判断。Java中在程序退出的时候需要将线程池销毁；而在Android中，线程池的生命周期通常和应用的生命周期相同，所以不需要纪进行销毁。
   
