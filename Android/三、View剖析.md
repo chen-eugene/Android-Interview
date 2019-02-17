@@ -152,7 +152,7 @@ view.measure(widthMeasureSpec, heightMeasureSpec);
  这样设计的考虑：Android的UI操作并不是线程安全的，如果允许在子线程中更新UI的话，必然会导致界面混乱。想要避免这个问题就必须采用加锁来保证UI操作的线程安全，这势必会导致效率的下降。所以为了提高UI操作的效率和UI操作的线程安全，就禁止在子线程中更新UI。 
  
   
-#### 10、invalidate、postInvalidate、requestLayout的区别。
+#### [10、invalidate、postInvalidate、requestLayout的区别。](https://blog.csdn.net/yanbober/article/details/46128379)
 
 - invalidate：请求重绘View树（也就是draw方法），如果View大小没有发生变化就不会调用layout过程，并且指挥绘制哪些需要重绘的View，也就是哪个View（View只绘制该View，ViewGroup绘制整个ViewGroup）请求invalidate方法就绘制该View。
 - postInvalidate：invalidate方法只能在UI线程中请求，postInvalidate可以在非UI线程中调用。
