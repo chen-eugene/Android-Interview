@@ -63,7 +63,7 @@ getMemoryClass()和getLargeMemoryClass()方法最终读取的仍然是dalvik.vm.
 
 **设置largeHeap的确可以申请到更多的内存，但是收到dalvik.vm.heapsize的限制，当内存很大时，每次gc将花费更多的时间，性能也会下降。**
 
-#### 4、了解sp的apply和commit的区别吗，sp具体是怎么实现的，sp什么时候会将内存中的数据写入到文件中。
+#### [4、了解sp的apply和commit的区别吗，sp具体是怎么实现的，sp什么时候会将内存中的数据写入到文件中。](http://weishu.me/2016/10/13/sharedpreference-advices/)
 Android 中的 SharedPreference 是轻量级的数据存储方式，能够保存简单的数据类型，比如 String、int、boolean 值等。其内部是以 XML 结构保存在 /data/data/包名/shared_prefs 文件夹下，数据以键值对的形式保存。
 
 - 初始化：首次使用SP的时候会通过IO操作把xml文件读取并存入一个map对象中，所以get操作实际上是直接访问的map集合，提高了效率，如果xml不存在就重新创建一个。
