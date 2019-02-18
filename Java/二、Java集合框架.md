@@ -46,6 +46,31 @@
  fast-fail机制是java集合保证迭代器数据和集合本身数据是否一致的一种机制，当多个线程直接修改集合的结构而没有通知迭代器的时候就有可能触发fast-fail机制，这里是有可能触发，而不是一定触发。
  
 
+#### [8、SparseArray的原理，与HashMap的区别。](https://extremej.itscoder.com/sparsearray_source_analyse/)
+ 
+ **原理：**
+ - 在Android中，SparseArray是用来取代HashMap的，它的key默认是int类型。
+ - 在它的内部使用的int[]数组来存放key，使用Object[]数组来存放value。
+ - 存放key的数组是有序的，采用二分查找法计算key应该插入的位置。
+ - 如果有冲突，就直接覆盖掉原来的值，并不会返回原值（HashMap会返回原值）。
+ - 如果当前要插入的 key 的索引上的值为DELETE，直接覆盖。
+ - 前几步都失败了，检查是否需要gc()并且在该索引上插入数据。
+ 
+ **与HashMap的区别：**
+ - 使用int[]数组存放key，避免了HashMap中基本数据类型装箱的消耗。
+ - 没有使用HashMap中的结构体Entry，节省了内存。
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
