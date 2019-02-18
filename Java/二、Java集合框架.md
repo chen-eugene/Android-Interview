@@ -26,7 +26,10 @@
 
 
 #### [6、ConcurrentHashMap的原理。](https://www.cnblogs.com/dolphin0520/p/3932905.html)
-
+  - get方法没有加锁。
+  - 默认情况下分为16个segment，segment之间不存在竞争关系，只要线程不是访问的同一个segment，那么就没有锁竞争，默认情况下允许16条线程并发的访问不会回发生竞争。
+  - 访问ConcurrentHashMap会进程两次的hash计算，第一次确定是在哪一个segment中，第二次是确定key的索引位置。
+  
 
 #### [7、什么是fast-fail机制。](https://blog.csdn.net/javazejian/article/details/53073995#%E7%90%86%E8%A7%A3iterator%E6%8E%A5%E5%8F%A3)
 
