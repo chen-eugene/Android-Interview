@@ -1,4 +1,10 @@
 #### 1、Serializable和Parcalable的区别。
+
+**序列化的三种场景：**
+ - 永久性保存对象，保存对象的字节序列到本地文件中；
+ - 对象在网络中传递； 
+ - 对象在IPC间传递。
+
 Parcelable的设计初衷是因为Serializable效率过慢（使用反射），为了在程序内不同组件间以及不同Android程序间(AIDL)高效的传输数据而设计，这些数据仅在内存中存在。Parcelable方式的实现原理是将一个完整的对象进行分解，而分解后的每一部分都是Intent所支持的数据类型，这样也就实现传递对象的功能了。
 - Parcelable的性能比Serializable好，因为后者在反射过程频繁GC，所以在内存间数据传输时推荐使用Parcelable，如activity间传输数据。
 
