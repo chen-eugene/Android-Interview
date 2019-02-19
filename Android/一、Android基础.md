@@ -14,7 +14,12 @@ Parcelable的设计初衷是因为Serializable效率过慢（使用反射），�
 
 -  Parcelable不能使用在要将数据存储在磁盘上的情况，因为Parcelable不能很好的保证数据的持续性在外界有变化的情况下。尽管Serializable效率低点，但此时还是建议使用Serializable 。
 
-#### 2、dpi、ppi、px、pt、dp、sp的区别。
+#### 2、Bundle传递数据为什么需要序列化
+ 
+ 想想Bundle的使用场景，在Intent传递数据的时候会用到Bundle，使用Intent启动一个Activity，那么必然会去通知AMS，这里和AMS的交互涉及到了多进程的交互，进程间传递数据必须进行序列化。
+
+
+#### 3、dpi、ppi、px、pt、dp、sp的区别。
 - px(pixel)：像素，电子屏幕上组成一幅图画或照片的最基本单元
 - pt(point)：点，印刷行业常用单位，等于1/72英寸
 - ppi(pixel per inch)：每英寸像素数，ppi是指屏幕上的像素密度，该值越高，则屏幕越细腻。   
@@ -43,7 +48,7 @@ density = dpi^2 = 445^2 = 198025
 
 
 
-#### 3、应用最多占多少内存。
+#### 4、应用最多占多少内存。
 ```
 获取app的分配的最大内存
 Runtime rt = Runtime.getRuntime();
@@ -71,7 +76,7 @@ getMemoryClass()和getLargeMemoryClass()方法最终读取的仍然是dalvik.vm.
 
 **设置largeHeap的确可以申请到更多的内存，但是收到dalvik.vm.heapsize的限制，当内存很大时，每次gc将花费更多的时间，性能也会下降。**
 
-#### [4、了解sp的apply和commit的区别吗，sp具体是怎么实现的，sp什么时候会将内存中的数据写入到文件中。](http://weishu.me/2016/10/13/sharedpreference-advices/)
+#### [5、了解sp的apply和commit的区别吗，sp具体是怎么实现的，sp什么时候会将内存中的数据写入到文件中。](http://weishu.me/2016/10/13/sharedpreference-advices/)
 Android 中的 SharedPreference 是轻量级的数据存储方式，能够保存简单的数据类型，比如 String、int、boolean 值等。其内部是以 XML 结构保存在 /data/data/包名/shared_prefs 文件夹下，数据以键值对的形式保存。
 
 - 初始化：首次使用SP的时候会通过IO操作把xml文件读取并存入一个map对象中，所以get操作实际上是直接访问的map集合，提高了效率，如果xml不存在就重新创建一个。
