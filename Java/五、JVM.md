@@ -249,7 +249,7 @@ Java虚拟机在执行Java程序的过程中会把所管理的内存区域划分
     - 可预测停顿：整个Java堆划分成为多个大小相等的独立区域。 G1跟踪各个Region里面的垃圾堆积的价值大小（回收所获得的空间大小以及回收所需时间的经验值），在后台维护一个优先列表，每次根据允许的收集时间，优先回收价值最大的Region。
    
    
-#### [10、Java类加载机制，类加载分为那几个阶段。](https://mp.weixin.qq.com/s?__biz=MzU4NDQ4MzU5OA==&mid=2247483934&idx=1&sn=f247f9bee4e240f5e7fac25659da3bff&chksm=fd98547fcaefdd6996e1a7046e03f29df9308bdf82ceeffd111112766ffd3187892700f64b40#rd)
+#### [10、Java类加载机制，类加载分为那几个阶段。](https://mp.weixin.qq.com/s?__biz=Mzg2OTA0Njk0OA==&mid=2247484955&amp;idx=1&amp;sn=61134e41716a6cb2b00051c128a36df4&source=41#wechat_redirect)
   
   **类加载机制**：虚拟机把描述类的数据从Class文件加载到内存，并对数据进行校验、转换解析和初始化，最终形成可以被虚拟机直接使用的Java类型。
   
