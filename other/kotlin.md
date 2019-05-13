@@ -48,3 +48,41 @@
   }  
   ```
 
+
+#### [2、内联函数inline。](https://www.jianshu.com/p/be78824ce1c2)
+
+  在kotlin中，函数也是对象，可以把它当做参数传递给函数。
+  ```
+  inline fun call(a:Int,b:Int,c:(Int,Int)->Int){
+    var x = c(a,b)
+    print(x)
+  }
+  ```
+  当申明inline的时候，这个lambda也默认为内联函数。
+  
+  在kotlin中，return只可以用在有名字的函数，或者匿名函数中，是的函数执行完毕。针对lambda表达式，不能直接使用return。可以使用return+label。
+  ```
+  fun main(){
+    println("start")
+    go die@{if(it == 1) return@die else println}
+    println("end")
+  }
+  ```
+  但是如果lambda应用在一个内联函数的时候，这时候可以直接return。
+  ```
+  fun main(){
+    println("start")
+    sayHello{ return }
+    println("end")
+  }
+  ``
+  
+  
+  
+  
+  
+
+
+
+
+
