@@ -1,8 +1,20 @@
-### 目录
-  - [JVM概述]()
+### [JVM系列文章]()
 
-### 
 
+#### 目录
+  - [JVM概述](#JVM概述)
+
+
+
+
+### JVM概述
+
+#### 1、JDK和JRE。
+  
+  - JRE(Java Runtime Environment):仅包含运行Java程序的必需组件，包括Java虚拟机以及Java核心类库等。  
+  - JDK(Java Development Kit):除了包含JRE外，还附带了一系列开发、诊断工具。  
+  
+  一般来说，如果只需要运行 Java 程序，那么你安装 JRE 即可。但如果你要进行 Java 程序的开发，那么你就需要安装 JDK。
 
 
 
