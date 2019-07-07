@@ -43,5 +43,5 @@
 ### [《计算机网络》(第7版 谢希仁)](https://github.com/chen-eugene/Interview/blob/master/note/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E3%80%8A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E3%80%8B(%E7%AC%AC7%E7%89%88%20%E8%B0%A2%E5%B8%8C%E4%BB%81).md)
 ### [《实战Gradle》(第三版)](https://github.com/chen-eugene/Interview/blob/master/note/Gradle%E5%AE%9E%E6%88%98/%E3%80%8AGradle%E5%AE%9E%E6%88%98%E3%80%8B.md)
 ### [《Web性能权威指南》](https://github.com/chen-eugene/Android-Interview/tree/master/note/Web%E6%80%A7%E8%83%BD%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97)
-### [趣谈Linux操作系统]()
+### [趣谈Linux操作系统](https://github.com/chen-eugene/Android-Interview/blob/master/note/Linux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E7%9B%AE%E5%BD%95.md)
 
