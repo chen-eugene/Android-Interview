@@ -87,5 +87,42 @@ Android 中的 SharedPreference 是轻量级的数据存储方式，能够保存
 - 写数据：SP 写入数据的操作是通过 Editor 完成的，一是将数据先写入内存中，即map集合；二是把数据写入到磁盘中。
   - commit：同步执行，会阻塞当前线程，有返回值。
   - apply：异步执行，没有返回值，推荐使用apply。 
+  
+<br>
+
+#### [6、compileSdkVersion，minSdkVersion，targetSdkVersion的区别](https://www.jianshu.com/p/358a3d42196e)
+
+  - compileSdkVersion：compileSdkVersion是我们告诉Gradle，我们是用哪一版本的Android Sdk去编译程序的，可以使用这个版本的API，比如我们使用的是7.0的版本，compileSdkVersion=24，那么我们对于拍照裁剪图片等功能的操作，就可以使用FileProvider了。
+  
+    我们改变compileSdkVersion的版本号，本质上改变不了我们程序的运行，虽然可能会报错误❌或者警告⚠️，但compileSdkVersion 只会在编译期间起作用，因为环境是compileSdkVersion这个版本的SDK，所以你可以用一些这个版本的API，但是只是IDE给你的便利性帮助而已，帮助你检测代码，避免使用一些弃用的API。
+    
+ -  minSdkVersion：就是我们的app能够运行的最小版本，如果选择16，那么就是Android 4.1 以及以上的设备才能运行我们app，如果小于这个版本，那么抱歉运行不了，我们不支持。
+
+
+ - targetSdkVersion：在 Android 4.4 (API 19）以后，AlarmManager 的 set() 和 setRepeat() 这两个 API 的行为发生了变化。
+ 
+   系统通过targetSdkVersion来保证Android的向前兼容性，在Android4.4之后的设备上，系统会判断你的targetSdkVersion是否小于19，如果小于的话，那就按照19之前的api方法，如果大于等于19，那么就按照之后的api方法来走，保证了程序运行的一致性。也就是向前兼容性。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
